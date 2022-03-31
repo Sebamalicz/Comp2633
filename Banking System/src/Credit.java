@@ -25,4 +25,10 @@ public class Credit extends Card{
     {
         return this.interestRate;
     }
+    
+    public void calculateBalanceToPay()
+    {
+        int interestAmount = this.balanceToPay * this.interestRate;
+        this.balanceToPay += interestAmount;
+    }
 }
