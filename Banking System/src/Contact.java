@@ -43,7 +43,7 @@ public class Contact {
         }
     }
 
-    public boolean editPayee(int accountNumber)
+    public boolean editPayee(int accountNumber, int newName, int newAccountNumber)
     {
         boolean edited = false;
         int length;
@@ -54,36 +54,60 @@ public class Contact {
 
         if(length < payeeAmount)
         {
-            System.in.
+            if(newName != null)
+            {
+                payees[length].setName(newName);     
+                edited = true;
+            }
+            if(newAccountNumber != 0)
+            {
+                payees[length].setAccountNumber(newAccountNumber);
+                edited = true;
+            }
         }
 
         return edited;
     }
 
-    public boolean editRecipient(String email)
+    public boolean editRecipient(String email, String newEmail, String newName, int newPhoneNumber)
     {
         boolean edited = false;
-        /*
-         * integrate editing of recipients
-         */
+        int length;
+
+        //get location in array of email if exits
+        for(length = 0; recipients[length].getEmail() == email; length++)
+        ;
+
+        if(length < recipientAmount)
+        {
+            if(newEmail != null)
+            {
+                recipients[length].setEmail(newEmail);
+                edited = true;
+            }
+            if(newName != null)
+            {
+                recipients[length].setName(newName);
+                edited = true;
+            }
+            if(newPhoneNumber)
+            {
+                recipients[length].setPhoneNumber(newPhoneNumber);
+                edited = true;
+            }
+        }
         return edited;
     }
 
-    public boolean addPayee(int accountNumber, String nickName)
+    public void addPayee(int accountNumber, String nickName)
     {
-        boolean added = false;
-        /*
-         * integrate adding of payees
-         */
-        return added;
+        payees[payeeAmount] = new Payee(accountNumber, nickName);
+        payeeAmount++;
     }
 
-    public boolean addRecipient(String email, String name, int phoneNumber)
+    public void addRecipient(String email, String name, int phoneNumber)
     {
-        boolean added = false;
-        /*
-         * integrate adding of recipients
-         */
-        return added;
+        recipients[recipientAmount] = new Recipient(email, name, phoneNumber);
+        recipientAmount++;
     }
 }
