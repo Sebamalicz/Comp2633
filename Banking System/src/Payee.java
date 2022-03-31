@@ -1,14 +1,12 @@
 /*
  * Payee deals the contacts in form of Payee's, mainly companies
  */
-public class Payee extends Contact{
+public class Payee {
     final private int accountNumber;
     private String nickName;
 
-    public Payee(int accountNumber, String nickName, Payee payees[],
-                 Recipient recipients[], int payeeAmount, int recipientAmount)
+    public Payee(int accountNumber, String nickName)
     {
-        super(payees, recipients, payeeAmount, recipientAmount);
         this.accountNumber = accountNumber;
         this.nickName = nickName;
     }
@@ -33,6 +31,16 @@ public class Payee extends Contact{
         }
 
         return isChanged;
+    }
+    
+    public boolean setAccountNumber(int newAccountNumber)
+    {
+        if(newAccountNumber > 99999999 && newAccountNumber < 1000000000)
+        {
+            this.accountNumber = newAccountNumber;
+            return true;
+        }
+        return false;
     }
 
 }
