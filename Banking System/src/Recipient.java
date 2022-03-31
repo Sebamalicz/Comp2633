@@ -1,13 +1,11 @@
 
-public class Recipient extends Contact{
+public class Recipient {
     private String email;
     private String name;
     private int phoneNumber;
 
-    public Recipient(String email, String name, int phoneNumber, Payee payees[],
-                    Recipient recipients[], int payeeAmount, int recipientAmount)
+    public Recipient(String email, String name, int phoneNumber)
     {
-        super(payees, recipients, payeeAmount, recipientAmount);
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
