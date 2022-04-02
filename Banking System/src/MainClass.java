@@ -1,3 +1,4 @@
+import java.util.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +10,9 @@ public class MainClass {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+        Scanner inputFile = new Scanner(new File("input.txt"));
         ArrayList<Savings> saving;
+        readFile(inputFile, saving);
         Swing screen = new Swing();
     }
 
@@ -105,18 +108,9 @@ public class MainClass {
                 email = temp;
                 nickName = input.nextLine();
                 temp = input.nextLine();
-                temp2 = Character.toLowerCase(temp);
-                if(temp2.charAt(0) >= 'a' && temp2.charAt(0) <= 'z')
-                {
-                    /* no phone number was added so use '0' */
-                    contacts.addRecipient(email, nickName, 0);
-                }
-                else
-                {
-                    /* phone number was included */
-                    phone = Integer.parseInt(temp);
-                    contacts.addRecipient(email, nickName, phone);
-                }
+                phone = Integer.parseInt(temp);
+                
+                contacts.addRecipient(email, nickName, phone);
 
                 temp = input.nextLine();
             }
