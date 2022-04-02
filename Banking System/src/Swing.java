@@ -1,32 +1,142 @@
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class Swing implements ActionListener{
+/*
+ *
+ */
+public class Swing {
+
+    private JFrame frame;
+    private JButton Login;
+    private JButton ForgotPassword;
+    private JTextField userName;
+    private JTextField pass;
+    private boolean loginPressed;
+    private boolean forgotPressed;
+    private String userInput;
+    private String passInput;
+
     public Swing()
     {
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        JButton button = new JButton("Login");
-        JLabel label = new JLabel("Number of Clicks: 0");
+        loginPressed = false;
+        forgotPressed = false;
+        Color background = new Color(103, 146, 103);
+        Login = new JButton("Login");
+        ForgotPassword = new JButton("Forgot Password");
+        frame = new JFrame();
 
-        button.addActionListener();
+        createInitialButtons();
+        createInitialTextInputBoxes();
 
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel.setLayout(new GridLayout(0 , 1));
-        panel.add(button);
-        panel.add(label);
+        frame.setOpacity(1);
+        frame.setSize(600, 600);
+        frame.setBackground(background);
+        frame.setLocationRelativeTo(null); //puts frame in center of screen
+        frame.setLayout(null); //uses no layout managers
+        frame.setVisible(true); //makes the frame visible
+    }
 
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Banking System");
-        frame.pack();
-        frame.setVisible(true);
+    private void createInitialButtons()
+    {
+        Login.setBounds(200, 400, 200, 40); //x axis, y axis, width, height
+        ForgotPassword.setBounds(200, 460, 200, 40);
+        Login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                loginPressed = true;
+                userInput = userName.getText();
+                passInput = pass.getText();
+                System.out.println(userInput);
+                System.out.println(passInput);
+            }
+        });
+        ForgotPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                forgotPressed = true;
+            }
+        });
+        frame.add(Login);
+        frame.add(ForgotPassword);
+    }
+
+
+    private void createInitialTextInputBoxes()
+    {
+        userName = new JTextField("Username");
+        pass = new JTextField("Password");
+
+        pass.setBounds(150, 300, 300, 40);
+        userName.setBounds(150, 240, 300, 40);
+
+        userName.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                 if(userName.getText().equals("Username"))
+                 {
+                     userName.setText("");
+                 }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                if(userName.getText().equals(""))
+                {
+                    userName.setText("Username");
+                }
+            }
+        });
+        pass.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                if(pass.getText().equals("Password"))
+                {
+                    pass.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                if(pass.getText().equals(""))
+                {
+                    pass.setText("Password");
+                }
+            }
+        });
+        frame.add(userName);
+        frame.add(pass);
+    }
+
+    public String getUserText()
+    {
+        return this.userInput;
+    }
+
+    public String getPassText()
+    {
+        return this.passInput;
+    }
+
+    public boolean getLoginPressed()
+    {
+        return this.loginPressed;
+    }
+
+    public boolean getForgetPressed()
+    {
+        return this.forgotPressed;
     }
 }
