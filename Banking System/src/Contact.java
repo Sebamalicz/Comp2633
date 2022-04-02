@@ -13,12 +13,12 @@ public class Contact {
     {
         this.payees = payees;
         this.recipients = recipients;
-        this.payeeAmount = payees.length();
-        this.recipientAmount = recipient.length();
+        this.payeeAmount = payees.length;
+        this.recipientAmount = recipients.length;
     }
 
     /*
-     * 
+     *
      */
     public void viewPayees()
     {
@@ -33,11 +33,11 @@ public class Contact {
             System.out.println("Account Number: " + payees[length].getAccountNumber());
             System.out.println("------------------------------------------------------");
         }
-        
+
     }
 
     /*
-     * 
+     *
      */
     public void viewRecipients()
     {
@@ -54,7 +54,7 @@ public class Contact {
     }
 
     /*
-     * 
+     *
      */
     public boolean editPayee(int accountNumber, int newName, int newAccountNumber)
     {
@@ -69,7 +69,7 @@ public class Contact {
         {
             if(newName != null)
             {
-                payees[length].setName(newName);     
+                payees[length].setName(newName);
                 edited = true;
             }
             if(newAccountNumber != 0)
@@ -83,7 +83,7 @@ public class Contact {
     }
 
     /*
-     * 
+     *
      */
     public boolean editRecipient(String email, String newEmail, String newName, int newPhoneNumber)
     {
@@ -116,7 +116,7 @@ public class Contact {
     }
 
     /*
-     * 
+     *
      */
     public void addPayee(int accountNumber, String nickName)
     {
@@ -125,7 +125,7 @@ public class Contact {
     }
 
     /*
-     * 
+     *
      */
     public void addRecipient(String email, String name, int phoneNumber)
     {
