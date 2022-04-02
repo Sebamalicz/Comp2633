@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /*
  * This Class Handles all of the Banking System Components, such as login
  * editing info, and checking all of users banking info.
@@ -6,11 +9,11 @@ public class MainClass {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+        ArrayList<Savings> saving;
         Swing screen = new Swing();
     }
-    
-    
-    public void readFile(Scanner input)
+
+    public void readFile(Scanner input, ArrayList<Savings> saving)
     {
         Contact contacts = new Contact();
         String temp;
@@ -51,13 +54,13 @@ public class MainClass {
             accNum = Integer.parseInt(temp);
             temp = input.nextLine();
             balance = Double.parseDouble(temp);
-            
+
             Chequing newCheq = new Chequing(cost, accNum, balance);
-            
+
             /* reads the ---------- */
             temp = input.nextLine();
-            
-            
+
+
             /* begin reading savings account*/
             temp = input.nextLine();
             while(temp != "-----------------")
@@ -69,18 +72,19 @@ public class MainClass {
                 accNum = Integer.parseInt(temp);
                 temp = input.nextLine();
                 balance = Double.parseDouble(temp);
-                
+
                 Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
+                saving.add(newSave);
             }
-            
+
             /* begin reading the payee info*/
-            
+
             temp = input.nextLine();
             while(temp != "-----------------")
             {
                 accNum = Integer.parseInt(temp);
                 temp = input.nextLine();
-                c = temp.getCharAt(0);
+                c = temp.charAt(0);
                 c = Character.toLowerCase(c);
                 if(c >= 'a' && c <= 'z')
                 {
@@ -93,7 +97,7 @@ public class MainClass {
                 }
                 temp = input.nextLine();
             }
-            
+
             /* begin reading recipient info*/
             temp = input.nextLine();
             while(temp != "-----------------")
@@ -105,20 +109,20 @@ public class MainClass {
                 if(temp2.charAt(0) >= 'a' && temp2.charAt(0) <= 'z')
                 {
                     /* no phone number was added so use '0' */
-                    contacts.addRecipent(email, nickName, 0);
+                    contacts.addRecipient(email, nickName, 0);
                 }
                 else
                 {
                     /* phone number was included */
                     phone = Integer.parseInt(temp);
-                    contacts.addRecipent(email, nickName, phone);
+                    contacts.addRecipient(email, nickName, phone);
                 }
-                
+
                 temp = input.nextLine();
             }
-            
-            
-            
+
+
+
         }
     }
 
