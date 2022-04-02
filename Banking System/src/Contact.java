@@ -33,7 +33,6 @@ public class Contact {
             System.out.println("Account Number: " + payees[length].getAccountNumber());
             System.out.println("------------------------------------------------------");
         }
-        exit;
         
     }
 
