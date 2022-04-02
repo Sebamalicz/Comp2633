@@ -1,7 +1,12 @@
+import java.util.ArrayList;
 
+/*
+ * This class deals with the contact portion of the Banking System. Allows the client
+ * to add/edit/remove payees and recipients from the given system.
+ */
 public class Contact {
-    private Payee payees[]; //Payee array to access various payees
-    private Recipient recipients[]; //Recipient array to acces various payees
+    private ArrayList<Payee> payees; //Payee array to access various payees
+    private ArrayList<Recipient> recipients; //Recipient array to acces various payees
     private int payeeAmount; //Amount of Payees within the Payee Array
     private int recipientAmount; //Amount of recipients within the Recipient Array
 
@@ -9,73 +14,94 @@ public class Contact {
      * This is the constructor for the Contact Class, sets up the Payee array, Recipient
      * array , payeeAmount and Recipient Amount
      */
-    public Contact(Payee payees[], Recipient recipients[])
+    public Contact(ArrayList<Payee> payees, ArrayList<Recipient> recipients)
     {
         this.payees = payees;
         this.recipients = recipients;
-        this.payeeAmount = payees.length;
-        this.recipientAmount = recipients.length;
+        this.payeeAmount = payees.size();
+        this.recipientAmount = recipients.size();
     }
 
     /*
-     *
+     * This method prints out the Payees that exists within the array list as long
+     * as there are payees that exist.
      */
     public void viewPayees()
     {
         int length;
-        System.out.println("--------------------------------------------------");
-        for(length = 0; length <= payeeAmount; length++)
+        if(payees.size() > 0) //checks if payee array is empty
         {
-            if(payees[length].getNickName() != null)
+            System.out.println("--------------------------------------------------");
+            for(length = 0; length <= payeeAmount; length++)
             {
-                System.out.println("Nickname: " + payees[length].getNickName());
+                if(payees.get(length).getNickName() != null) //as long as the payee nickname exists
+                {
+                    System.out.println("Nickname: " + payees.get(length).getNickName());
+                }
+                System.out.println("Account Number: " + payees.get(length).getAccountNumber());
+                System.out.println("------------------------------------------------------");
             }
-            System.out.println("Account Number: " + payees[length].getAccountNumber());
-            System.out.println("------------------------------------------------------");
         }
 
     }
 
     /*
-     *
+     * This method prints out the Recipients that exists within the array list as
+     * long as there are recipients that exist.
      */
     public void viewRecipients()
     {
         int length;
-        for(length = 0; length <= recipientAmount; length++)
+        if(recipients.size() > 0) //checks if recipient array is empty
         {
-            System.out.println("Email Address: " + recipients[length].getEmail());
-            if(recipients[length].getName() != null)
+            for(length = 0; length <= recipientAmount; length++)
             {
-                System.out.println("Name: " + recipients[length].getName());
+                System.out.println("Email Address: " + recipients.get(length).getEmail());
+                if(recipients.get(length).getName() != null) //as long as this recipient name is not null
+                {
+                    System.out.println("Name: " + recipients.get(length).getName());
+                }
+                System.out.println("Phone Number" + recipients.get(length).getPhoneNumber());
             }
-            System.out.println("Phone Number" + recipients[length].getPhoneNumber());
         }
     }
 
     /*
-     *
+     * This method allows the client to edit payees that already exist within the
+     * system. If this payee that is specified does not exist within the system
+     * then nothing is changed within the array. Allows the editing of Name and
+     * accountNumber. Also allows the client to remove the payee if the client
+     * chooses to do so.
      */
-    public boolean editPayee(int accountNumber, String newName, int newAccountNumber)
+    public boolean editPayee(int accountNumber, String newName,
+                             int newAccountNumber, boolean remove)
     {
         boolean edited = false;
         int length;
 
         //get location in array of account number if exists
-        for(length = 0; payees[length].getAccountNumber() == accountNumber; length++)
+        for(length = 0; payees.get(length).getAccountNumber() == accountNumber; length++)
         ;
 
-        if(length < payeeAmount)
+        if(remove) //checks whether the client wants to remove the payee
         {
-            if(newName != null)
+            removePayee(length);
+            payeeAmount--;
+        }
+        else
+        {
+            if(length < payeeAmount) //checks whether the payee exists within the array
             {
-                payees[length].setNickName(newName);
-                edited = true;
-            }
-            if(newAccountNumber != 0)
-            {
-                payees[length].setAccountNumber(newAccountNumber);
-                edited = true;
+                if(newName != null) //checks if client specified new name
+                {
+                    payees.get(length).setNickName(newName);
+                    edited = true;
+                }
+                if(newAccountNumber != 0) //checks if client specified new accountNumber
+                {
+                    payees.get(length).setAccountNumber(newAccountNumber);
+                    edited = true;
+                }
             }
         }
 
@@ -83,54 +109,93 @@ public class Contact {
     }
 
     /*
-     *
+     * This method allows the client to edit recipients that already exist within the
+     * system. If this recipient that is specified does not exist within the system
+     * then nothing is changed within the array. Allows the editing of email, name and
+     * phoneNumber. Also allows the client to remove the recipient if the client chooses
+     * to do so.
      */
-    public boolean editRecipient(String email, String newEmail, String newName, int newPhoneNumber)
+    public boolean editRecipient(String email, String newEmail, String newName,
+                                 int newPhoneNumber, boolean remove)
     {
         boolean edited = false;
         int length;
 
         //get location in array of email if exits
-        for(length = 0; recipients[length].getEmail() == email; length++)
+        for(length = 0; recipients.get(length).getEmail() == email; length++)
         ;
 
-        if(length < recipientAmount)
+        if(remove) //checks whether the client wants to remove the recipient
         {
-            if(newEmail != null)
+            removeRecipient(length);
+            recipientAmount--;
+        }
+        else
+        {
+            if(length < recipientAmount) //checks whether the recipient exists within the array
             {
-                recipients[length].setEmail(newEmail);
-                edited = true;
-            }
-            if(newName != null)
-            {
-                recipients[length].setName(newName);
-                edited = true;
-            }
-            if(newPhoneNumber >= 403000000 && newPhoneNumber <= 403999999 ||
-               newPhoneNumber >= 587000000 && newPhoneNumber <= 587999999)
-            {
-                recipients[length].setPhoneNumber(newPhoneNumber);
-                edited = true;
+                if(newEmail != null) //checks if client specified new email
+                {
+                    recipients.get(length).setEmail(newEmail);
+                    edited = true;
+                }
+                if(newName != null) //checks if client specified new name
+                {
+                    recipients.get(length).setName(newName);
+                    edited = true;
+                }
+                if(newPhoneNumber >= 403000000 && newPhoneNumber <= 403999999 ||
+                   newPhoneNumber >= 587000000 && newPhoneNumber <= 587999999)
+                    //checks whether phone number is within Alberta phone number ranges
+                {
+                    recipients.get(length).setPhoneNumber(newPhoneNumber);
+                    edited = true;
+                }
             }
         }
+
         return edited;
     }
 
     /*
-     *
+     * This method allows the client to add a payee with the given accountNumber
+     * and a nickname(if chosen by the client), and adds it to the array of
+     * payees.
      */
     public void addPayee(int accountNumber, String nickName)
     {
-        payees[payeeAmount] = new Payee(accountNumber, nickName);
+        Payee addNew = new Payee(accountNumber, nickName);
+        payees.add(addNew);
         payeeAmount++;
     }
 
     /*
-     *
+     * This method allows the client to add a recipient with the given email, name
+     * and phoneNumber (if chosen by the client), and adds it to the array of
+     * recipients;
      */
     public void addRecipient(String email, String name, int phoneNumber)
     {
-        recipients[recipientAmount] = new Recipient(email, name, phoneNumber);
+        Recipient addNew = new Recipient(email, name, phoneNumber);
+        recipients.add(addNew);
         recipientAmount++;
+    }
+
+    /*
+     * This method allows the client to reomve a payee from the system and from the
+     * payee array.
+     */
+    public void removePayee(int length)
+    {
+        payees.remove(length);
+    }
+
+    /*
+     * This method allwos the client to remove a recipient from the system and from
+     * the recipient array.
+     */
+    public void removeRecipient(int length)
+    {
+        recipients.remove(length);
     }
 }

@@ -17,7 +17,8 @@ public class Card {
     public void viewTransactions(Transaction transaction)
     {
         /*
-         * To implement after transactions
+         * To Implement after Transaction class is complete
+         * Will display the transactions of the given card (debit/credit(if exist))
          */
     }
 }
