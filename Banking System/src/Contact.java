@@ -1,19 +1,25 @@
 
 public class Contact {
-    private Payee payees[];
-    private Recipient recipients[];
-    private int payeeAmount;
-    private int recipientAmount;
+    private Payee payees[]; //Payee array to access various payees
+    private Recipient recipients[]; //Recipient array to acces various payees
+    private int payeeAmount; //Amount of Payees within the Payee Array
+    private int recipientAmount; //Amount of recipients within the Recipient Array
 
-    public Contact(Payee payees[], Recipient recipients[], int payeeAmount,
-                   int recipientAmount)
+    /*
+     * This is the constructor for the Contact Class, sets up the Payee array, Recipient
+     * array , payeeAmount and Recipient Amount
+     */
+    public Contact(Payee payees[], Recipient recipients[])
     {
         this.payees = payees;
         this.recipients = recipients;
-        this.payeeAmount = payeeAmount;
-        this.recipientAmount = recipientAmount;
+        this.payeeAmount = payees.length();
+        this.recipientAmount = recipient.length();
     }
 
+    /*
+     * 
+     */
     public void viewPayees()
     {
         int length;
@@ -27,8 +33,13 @@ public class Contact {
             System.out.println("Account Number: " + payees[length].getAccountNumber());
             System.out.println("------------------------------------------------------");
         }
+        exit;
+        
     }
 
+    /*
+     * 
+     */
     public void viewRecipients()
     {
         int length;
@@ -43,6 +54,9 @@ public class Contact {
         }
     }
 
+    /*
+     * 
+     */
     public boolean editPayee(int accountNumber, int newName, int newAccountNumber)
     {
         boolean edited = false;
@@ -69,6 +83,9 @@ public class Contact {
         return edited;
     }
 
+    /*
+     * 
+     */
     public boolean editRecipient(String email, String newEmail, String newName, int newPhoneNumber)
     {
         boolean edited = false;
@@ -99,15 +116,18 @@ public class Contact {
         return edited;
     }
 
+    /*
+     * 
+     */
     public void addPayee(int accountNumber, String nickName)
     {
-        /*
-         * repository trial
-         */
         payees[payeeAmount] = new Payee(accountNumber, nickName);
         payeeAmount++;
     }
 
+    /*
+     * 
+     */
     public void addRecipient(String email, String name, int phoneNumber)
     {
         recipients[recipientAmount] = new Recipient(email, name, phoneNumber);
