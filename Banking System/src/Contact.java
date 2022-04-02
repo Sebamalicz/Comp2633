@@ -101,6 +101,9 @@ public class Contact {
 
     public void addPayee(int accountNumber, String nickName)
     {
+        /*
+         * repository trial
+         */
         payees[payeeAmount] = new Payee(accountNumber, nickName);
         payeeAmount++;
     }
