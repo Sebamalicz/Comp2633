@@ -11,7 +11,8 @@ public class Chequing extends Account{
     public void getCheque()
     {
         /*
-         * Implement later
+         * Gets cheque and sends it to the email address that is written under
+         * the account, to be further processed by the
          */
     }
 

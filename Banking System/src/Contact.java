@@ -23,6 +23,22 @@ public class Contact {
     }
 
     /*
+     * This is a getter for the Payee array list
+     */
+    public ArrayList<Payee> getPayees()
+    {
+        return this.payees;
+    }
+
+    /*
+     * This is a getter for the Recipient array list
+     */
+    public ArrayList<Recipient> getRecipients()
+    {
+        return this.recipients;
+    }
+
+    /*
      * This method prints out the Payees that exists within the array list as long
      * as there are payees that exist.
      */
