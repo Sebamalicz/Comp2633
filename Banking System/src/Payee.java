@@ -2,7 +2,7 @@
  * Payee deals the contacts in form of Payee's, mainly companies
  */
 public class Payee {
-    final private int accountNumber;
+    private int accountNumber;
     private String nickName;
 
     public Payee(int accountNumber, String nickName)
@@ -32,7 +32,7 @@ public class Payee {
 
         return isChanged;
     }
-    
+
     public boolean setAccountNumber(int newAccountNumber)
     {
         if(newAccountNumber > 99999999 && newAccountNumber < 1000000000)

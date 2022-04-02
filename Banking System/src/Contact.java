@@ -56,7 +56,7 @@ public class Contact {
     /*
      *
      */
-    public boolean editPayee(int accountNumber, int newName, int newAccountNumber)
+    public boolean editPayee(int accountNumber, String newName, int newAccountNumber)
     {
         boolean edited = false;
         int length;
@@ -69,7 +69,7 @@ public class Contact {
         {
             if(newName != null)
             {
-                payees[length].setName(newName);
+                payees[length].setNickName(newName);
                 edited = true;
             }
             if(newAccountNumber != 0)
@@ -106,7 +106,8 @@ public class Contact {
                 recipients[length].setName(newName);
                 edited = true;
             }
-            if(newPhoneNumber)
+            if(newPhoneNumber >= 403000000 && newPhoneNumber <= 403999999 ||
+               newPhoneNumber >= 587000000 && newPhoneNumber <= 587999999)
             {
                 recipients[length].setPhoneNumber(newPhoneNumber);
                 edited = true;
