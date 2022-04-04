@@ -34,15 +34,25 @@ public class Account {
         return this.transactions.size();
     }
 
-    public boolean payBills(Payee payee, double amount, String date) {
+    public boolean payBill(Payee payee, double amount, String date) {
         boolean payProcessed = false;
-        /*
-         * Implement after Contact class && Swing class Will have to display the
-         * contact, and contact type (recipient, Payee) to the screen using swing and
-         * once a button is pressed by the user a payment to the contact will be
-         * completed and the amount sent to the contact will be subtracted from the
-         * account selected.
-         */
+
+        if (payee != null && amount <= this.balance)
+        {
+            this.balance =- amount;
+            if (payee.getNickName() != null)
+            {
+                Transaction newTrans = new Transaction(date, "Bill paid to: " + payee.getNickName(), amount);
+                this.transactions.add(newTrans);
+            } else
+            {
+                Transaction newTrans = new Transaction(date, "Bill paid to account number: " + payee.getAccountNumber(), amount);
+                this.transactions.add(newTrans);
+            }
+            payProcessed = true;
+        }
+
+
         return payProcessed;
     }
 
@@ -59,6 +69,8 @@ public class Account {
         {
             this.balance =- amount;
             account.recieveMoney(amount);
+            Transaction newTrans = new Transaction(date, "Moved money to account: " + account.getAccountNumber(), amount);
+            this.transactions.add(newTrans);
             moveProcessed = true;
         }
 
@@ -68,9 +80,11 @@ public class Account {
     public boolean eTransfer(Recipient recipient, double amount, String date) {
         boolean moveProcessed = false;
 
-        if (recipient != null && amount <= balance)
+        if (recipient != null && amount <= this.balance)
         {
-            balance =- amount;
+            this.balance =- amount;
+            Transaction newTrans = new Transaction(date, "eTransfered money to: " + recipient.getName(), amount);
+            this.transactions.add(newTrans);
             moveProcessed = true;
         }
 
