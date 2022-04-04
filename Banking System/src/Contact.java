@@ -10,8 +10,8 @@ public class Contact {
 
     public Contact()
     {
-        this.payees = null;
-        this.recipients = null;
+        this.payees = new ArrayList<Payee>();
+        this.recipients = new ArrayList<Recipient>();
     }
 
     /*

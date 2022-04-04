@@ -17,16 +17,21 @@ public class MainClass {
         Swing screen = new Swing();
         String username, password;
         boolean loginPressed = false;
-
+//
+//        while(screen.)
+//        {
+//            loginPressed = screen.getLoginPressed();
+//            //System.out.println();
+//        }
         while(!loginPressed)
         {
             loginPressed = screen.getLoginPressed();
-            System.out.println();
         }
 
 
         if(loginPressed)
         {
+            System.out.println("here");
             username = screen.getUserText();
             password = screen.getPassText();
             try
@@ -67,17 +72,17 @@ public class MainClass {
         {
             if(username.equals(input.nextLine()))
             {
-                System.out.println(input + '\n');
-                
+                System.out.println(input);
+
                 if(password.equals(input.nextLine()))
                 {
-                    System.out.println(input + '\n');
-                    
+                    System.out.println(input);
+
                     temp = input.nextLine();
                     if(temp.equalsIgnoreCase("start client"))
                     {
                         System.out.println(temp + '\n');
-                        
+
                         temp = input.nextLine();
                         if(!temp.equalsIgnoreCase("end client"))
                         {
@@ -103,22 +108,18 @@ public class MainClass {
 
                     /* reads the ---------- */
                     temp = input.nextLine();
-<<<<<<< HEAD
+
                     System.out.println(temp);
 
-=======
-                    System.out.println(temp + '\n');
-                    
->>>>>>> 828fc486d204f2b2cc1e5cf2da01b86d943a77c1
                     /* begin reading chequing info*/
                     temp = input.nextLine();
                     System.out.println(temp + '\n');
                     cost = Double.parseDouble(temp);
-                    
+
                     temp = input.nextLine();
                     System.out.println(temp + '\n');
                     accNum = Integer.parseInt(temp);
-                    
+
                     temp = input.nextLine();
                     System.out.println(temp + '\n');
                     balance = Double.parseDouble(temp);
@@ -130,62 +131,42 @@ public class MainClass {
                     System.out.println(temp + '\n');
 
 
-                    /* begin reading savings account*/
                     temp = input.nextLine();
-                    System.out.println(temp + '\n');
-                    while(temp != "----------------")
+                    System.out.println(temp);
+                    /* begin reading savings account*/
+                    while (temp.compareTo("----------------") != 0)
                     {
-<<<<<<< HEAD
                         interestRate = Double.parseDouble(temp);
+
                         temp = input.nextLine();
                         System.out.println(temp);
                         interestGained = Double.parseDouble(temp);
+
                         temp = input.nextLine();
                         System.out.println(temp);
                         accNum = Integer.parseInt(temp);
+
                         temp = input.nextLine();
                         System.out.println(temp);
                         balance = Double.parseDouble(temp);
 
                         Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
                         saving.add(newSave);
+
                         temp = input.nextLine();
                         System.out.println(temp);
-
-=======
-                        if(temp != "----------------")
-                        {
-                            interestRate = Double.parseDouble(temp);
-                            temp = input.nextLine();
-                            System.out.println(temp + '\n');
-                            
-                            interestGained = Double.parseDouble(temp);
-                            temp = input.nextLine();
-                            System.out.println(temp + '\n');
-                        
-                            accNum = Integer.parseInt(temp);
-                            temp = input.nextLine();
-                            System.out.println(temp + '\n');
-                            balance = Double.parseDouble(temp);
-
-                            Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
-                            saving.add(newSave);
-                            temp = input.nextLine();
-                            System.out.println(temp + '\n');
-                        }
->>>>>>> 828fc486d204f2b2cc1e5cf2da01b86d943a77c1
                     }
 
                     /* begin reading the payee info*/
 
                     temp = input.nextLine();
                     System.out.println(temp + '\n');
-                    while(temp != "-----------------")
+                    while(temp.compareTo("----------------") != 0)
                     {
                         accNum = Integer.parseInt(temp);
                         temp = input.nextLine();
                         System.out.println(temp + '\n');
-                        
+
                         c = temp.charAt(0);
                         c = Character.toLowerCase(c);
                         if(c >= 'a' && c <= 'z')
@@ -204,7 +185,7 @@ public class MainClass {
                     /* begin reading recipient info*/
                     temp = input.nextLine();
                     System.out.println(temp + '\n');
-                    while(temp != "-----------------")
+                    while(temp.compareTo("----------------") != 0)
                     {
                         email = temp;
                         nickName = input.nextLine();
