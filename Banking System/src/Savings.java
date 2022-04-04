@@ -19,12 +19,12 @@ public class Savings extends Account{
     {
         return this.interestGained;
     }
-    
+
     public double calculateInterestGained()
     {
         int gained = getBalance() * interestRate;
         interestGained += gained;
-        
+
         return gained;
     }
 }

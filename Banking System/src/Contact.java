@@ -10,6 +10,14 @@ public class Contact {
     private int payeeAmount; //Amount of Payees within the Payee Array
     private int recipientAmount; //Amount of recipients within the Recipient Array
 
+    public Contact()
+    {
+        this.payees = null;
+        this.recipients = null;
+        this.payeeAmount = 0;
+        this.recipientAmount = 0;
+    }
+
     /*
      * This is the constructor for the Contact Class, sets up the Payee array, Recipient
      * array , payeeAmount and Recipient Amount
@@ -214,6 +222,6 @@ public class Contact {
     {
         recipients.remove(length);
     }
-    
-   
+
+
 }

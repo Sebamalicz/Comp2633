@@ -35,7 +35,6 @@ public class Swing {
         createInitialButtons();
         createInitialTextInputBoxes();
 
-        frame.setOpacity(1);
         frame.setSize(600, 600);
         frame.setBackground(background);
         frame.setLocationRelativeTo(null); //puts frame in center of screen
@@ -51,25 +50,37 @@ public class Swing {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                loginPressed = true;
+                setLoginPressed();
                 userInput = userName.getText();
                 passInput = pass.getText();
-                System.out.println(userInput);
+               /* System.out.println(userInput);
                 System.out.println(passInput);
+                if(getLoginPressed())
+                {
+                    System.out.println("True");
+                }*/
             }
         });
         ForgotPassword.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                forgotPressed = true;
+                setForgotPressed();
             }
         });
         frame.add(Login);
         frame.add(ForgotPassword);
     }
 
+    private void setLoginPressed()
+    {
+        this.loginPressed = true;
+    }
 
+    private void setForgotPressed()
+    {
+        this.forgotPressed = true;
+    }
     private void createInitialTextInputBoxes()
     {
         userName = new JTextField("Username");
