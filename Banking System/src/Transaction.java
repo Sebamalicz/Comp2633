@@ -1,5 +1,6 @@
 /*
- * This is a transaction class.
+ This class contains information about a transaction that the client made. Information included is the date the transaction was made,
+ the location the transaction was made, and the amount spent in the transaction.
  */
 public class Transaction {
 

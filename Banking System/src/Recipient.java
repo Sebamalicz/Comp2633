@@ -1,4 +1,7 @@
-
+/* 
+This class contains data and methods related to Recipients, which are
+people that the client can eTransfer money to.
+*/
 public class Recipient {
     private String email;
     private String name;

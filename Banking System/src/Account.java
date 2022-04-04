@@ -1,7 +1,4 @@
 /*
-*This is a fucking class
-*/
-/*
  * This Class allows the user to see all the info about their account including
  * amounts in saving/chequing accounts, as well as pay bills and move money
  * around.
