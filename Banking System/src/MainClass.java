@@ -89,14 +89,14 @@ public class MainClass {
                             balance = Double.parseDouble(temp);
 
                             Chequing newCheq = new Chequing(cost, accNum, balance);
-                            
+
                         }
                     }
-                    
+
                     /* reads the ---------- */
                     temp = input.nextLine();
                     System.out.println(temp);
-                    
+
                     /* begin reading chequing info*/
                     temp = input.nextLine();
                     cost = Double.parseDouble(temp);
@@ -106,7 +106,7 @@ public class MainClass {
                     balance = Double.parseDouble(temp);
 
                     Chequing newCheq = new Chequing(cost, accNum, balance);
-                    
+
                     /* reads the ---------- */
                     temp = input.nextLine();
                     System.out.println(temp);
@@ -117,8 +117,6 @@ public class MainClass {
                     System.out.println(temp);
                     while(temp != "----------------")
                     {
-                        if(temp != "----------------")
-                        {
                         interestRate = Double.parseDouble(temp);
                         temp = input.nextLine();
                         System.out.println(temp);
@@ -134,7 +132,7 @@ public class MainClass {
                         saving.add(newSave);
                         temp = input.nextLine();
                         System.out.println(temp);
-                        }
+
                     }
 
                     /* begin reading the payee info*/
