@@ -31,9 +31,6 @@ public class Card {
                 System.out.println("$ Spent in Transaction: " + transaction.get(length).getAmountUsed());
                 System.out.println("------------------------------------------------------");
             }
-        }
-        
-        
-        
+        } 
     }
 }
