@@ -6,6 +6,7 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /*
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 public class Swing {
 
     private JFrame frame;
+    private JLabel label;
     private JButton Login;
     private JButton ForgotPassword;
     private JTextField userName;
@@ -27,19 +29,31 @@ public class Swing {
     {
         loginPressed = false;
         forgotPressed = false;
-        Color background = new Color(103, 146, 103);
+        Color background = new Color(9, 97, 146);
         Login = new JButton("Login");
         ForgotPassword = new JButton("Forgot Password");
         frame = new JFrame();
+        label = new JLabel();
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(background);
+        label.setOpaque(true);
+        label.setSize(350,270);
+        label.setLocation(150,150);
+        label.setBackground(Color.white);
+        frame.add(label);
 
         createInitialButtons();
         createInitialTextInputBoxes();
 
         frame.setSize(600, 600);
-        frame.setBackground(background);
         frame.setLocationRelativeTo(null); //puts frame in center of screen
         frame.setLayout(null); //uses no layout managers
         frame.setVisible(true); //makes the frame visible
+        if(frame.isBackgroundSet())
+        {
+            System.out.println("ok");
+        }
     }
 
     private void createInitialButtons()
@@ -53,12 +67,6 @@ public class Swing {
                 setLoginPressed();
                 userInput = userName.getText();
                 passInput = pass.getText();
-               /* System.out.println(userInput);
-                System.out.println(passInput);
-                if(getLoginPressed())
-                {
-                    System.out.println("True");
-                }*/
             }
         });
         ForgotPassword.addActionListener(new ActionListener() {

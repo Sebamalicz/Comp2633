@@ -112,6 +112,7 @@ public class MainClass {
 
                         Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
                         saving.add(newSave);
+                        temp = input.nextLine();
                     }
 
                     /* begin reading the payee info*/
