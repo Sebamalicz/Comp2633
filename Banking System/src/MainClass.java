@@ -32,13 +32,12 @@ public class MainClass {
 
         while(!loggedIn)
         {
-            System.out.println("before flush");
             while(!loginPressed)
             {
                 System.out.flush(); //flushes buffer to set loginPressed
                 loginPressed = screen.getLoginPressed();
             }
-            System.out.println("after flush");
+
             if(loginPressed)
             {
                 username = screen.getUserText();
@@ -58,6 +57,10 @@ public class MainClass {
                         display = new Display(contacts, chequing, saving, credit);
                         screen.disposeLogin();
                         display.displayMenu();
+                    }
+                    else
+                    {
+                        loginPressed = false;
                     }
                 }
                 catch (FileNotFoundException e)

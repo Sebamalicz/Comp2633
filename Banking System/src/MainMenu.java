@@ -37,52 +37,65 @@ public class MainMenu {
     private void createInitialButtons(Chequing chequing, ArrayList<Savings> saving, ArrayList<Credit> credit)
     {
         int i = 0;
-        createChequing(chequing, i);
-        createSaving(saving, i);
+        i = createChequing(chequing, i);
+        i = createSaving(saving, i);
         createCredit(credit, i);
 
     }
 
-    private void createChequing(Chequing chequing, int i)
+    private int createChequing(Chequing chequing, int i)
     {
 
         //Add chequing account view Button to screen
         view.add(new JButton("View"));
-        view.get(i).setBounds(initialX, initialY + (i * 40), 100, 30);
+        view.get(i).setBounds(initialX, initialY + (i * 50), 100, 30);
         view.get(i).addActionListener(new ActionListener()
         {
             //allows the clicking of view for chequing
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*
-                 * Selected account will be the singular chequing account
-                 */
+                frame.dispose();
+                transactionScreen screen = new transactionScreen(chequing);
             }
         });
         frame.add(view.get(i));
+        i++;
+        return i;
     }
 
-    private void createSaving(ArrayList<Savings> saving, int i)
+    private int createSaving(ArrayList<Savings> saving, int i)
     {
         //add savings account view buttons to screen (if multiple exist/ or single)
         if(saving != null)
         {
-            for(i = 1; i < saving.size(); i++)
+            while(i < (saving.size() + 1))
             {
-                view.get(i).add(new JButton("View"));
-                view.get(i).setBounds(initialX, initialY + (i * 40), 100, 30);
+                view.add(new JButton("View"));
+                view.get(i).setBounds(initialX, initialY + (i * 50), 100, 30);
                 view.get(i).addActionListener(new ActionListener()
                 {
                     //allows the clicking of view for savings accounts
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                       int s = view.indexOf(e.getSource());
-                       selectedS = saving.get(s);
+                       int i, savingNumber = 0;
+                       for(i = 0; i < saving.size(); i++)
+                       {
+                           if(e.getSource() == saving.get(i))
+                           {
+                               savingNumber = i;
+                               i = saving.size();
+                           }
+                       }
+                       frame.dispose();
+                       transactionScreen screen = new transactionScreen(saving.get(savingNumber));
                     }
                 });
                 frame.add(view.get(i));
+                i++;
             }
         }
+
+        return i;
     }
 
     private void createCredit(ArrayList<Credit> credit, int i)
@@ -93,15 +106,24 @@ public class MainMenu {
         {
             while(i < (temp + credit.size()))
             {
-                view.get(i).add(new JButton("View"));
+                view.add(new JButton("View"));
                 view.get(i).setBounds(initialX, initialY + (i * 40), 100, 30);
                 view.get(i).addActionListener(new ActionListener()
                 {
                     //allows the clicking of view for credit accounts
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int c = view.indexOf(e.getSource());
-                        selectedCr = credit.get(c);
+                        int i, creditNumber = 0;
+                        for(i = 0; i < credit.size(); i++)
+                        {
+                            if(e.getSource() == credit.get(i))
+                            {
+                                creditNumber = i;
+                                i = credit.size();
+                            }
+                        }
+                        frame.dispose();
+                        transactionScreen screen = new transactionScreen(credit.get(creditNumber));
                     }
                 });
                 frame.add(view.get(i));
