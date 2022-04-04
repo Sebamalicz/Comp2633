@@ -92,6 +92,21 @@ public class MainClass {
                             
                         }
                     }
+                    
+                    /* reads the ---------- */
+                    temp = input.nextLine();
+                    System.out.println(temp);
+                    
+                    /* begin reading chequing info*/
+                    temp = input.nextLine();
+                    cost = Double.parseDouble(temp);
+                    temp = input.nextLine();
+                    accNum = Integer.parseInt(temp);
+                    temp = input.nextLine();
+                    balance = Double.parseDouble(temp);
+
+                    Chequing newCheq = new Chequing(cost, accNum, balance);
+                    
                     /* reads the ---------- */
                     temp = input.nextLine();
                     System.out.println(temp);
