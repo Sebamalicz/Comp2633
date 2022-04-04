@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 
 public class Credit extends Card{
     private double balanceToPay;
     private double creditLimit;
     final private double interestRate;
 
-    public Credit (double balanceToPay, double creditLimit, double interestRate, int cardNumber) {
-        super(cardNumber);
+    public Credit (double balanceToPay, double creditLimit, double interestRate, int cardNumber, ArrayList<Transaction> transactions) {
+        super(cardNumber, transactions);
         this.balanceToPay = balanceToPay;
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;
@@ -25,10 +26,10 @@ public class Credit extends Card{
     {
         return this.interestRate;
     }
-    
+
     public void calculateBalanceToPay()
     {
-        int interestAmount = this.balanceToPay * this.interestRate;
+        double interestAmount = this.balanceToPay * this.interestRate;
         this.balanceToPay += interestAmount;
     }
 }

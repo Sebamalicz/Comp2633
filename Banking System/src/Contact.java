@@ -7,15 +7,11 @@ import java.util.ArrayList;
 public class Contact {
     private ArrayList<Payee> payees; //Payee array to access various payees
     private ArrayList<Recipient> recipients; //Recipient array to acces various payees
-    private int payeeAmount; //Amount of Payees within the Payee Array
-    private int recipientAmount; //Amount of recipients within the Recipient Array
 
     public Contact()
     {
         this.payees = null;
         this.recipients = null;
-        this.payeeAmount = 0;
-        this.recipientAmount = 0;
     }
 
     /*
@@ -26,8 +22,6 @@ public class Contact {
     {
         this.payees = payees;
         this.recipients = recipients;
-        this.payeeAmount = payees.size();
-        this.recipientAmount = recipients.size();
     }
 
     /*
@@ -38,6 +32,11 @@ public class Contact {
         return this.payees;
     }
 
+    public int getPayeeAmount()
+    {
+        return this.payees.size();
+    }
+
     /*
      * This is a getter for the Recipient array list
      */
@@ -46,17 +45,23 @@ public class Contact {
         return this.recipients;
     }
 
+    public int getRecipientAmount()
+    {
+        return this.recipients.size();
+    }
+
     /*
      * This method prints out the Payees that exists within the array list as long
      * as there are payees that exist.
      */
     public void viewPayees()
     {
+        int payeeAmnt = getPayeeAmount();
         int length;
-        if(payees.size() > 0) //checks if payee array is empty
+        if(payeeAmnt > 0) //checks if payee array is empty
         {
             System.out.println("--------------------------------------------------");
-            for(length = 0; length <= payeeAmount; length++)
+            for(length = 0; length <= payeeAmnt; length++)
             {
                 if(payees.get(length).getNickName() != null) //as long as the payee nickname exists
                 {
@@ -75,10 +80,11 @@ public class Contact {
      */
     public void viewRecipients()
     {
+        int recipientAmnt = getRecipientAmount();
         int length;
         if(recipients.size() > 0) //checks if recipient array is empty
         {
-            for(length = 0; length <= recipientAmount; length++)
+            for(length = 0; length <= recipientAmnt; length++)
             {
                 System.out.println("Email Address: " + recipients.get(length).getEmail());
                 if(recipients.get(length).getName() != null) //as long as this recipient name is not null
@@ -110,11 +116,10 @@ public class Contact {
         if(remove) //checks whether the client wants to remove the payee
         {
             removePayee(length);
-            payeeAmount--;
         }
         else
         {
-            if(length < payeeAmount) //checks whether the payee exists within the array
+            if(length < getPayeeAmount()) //checks whether the payee exists within the array
             {
                 if(newName != null) //checks if client specified new name
                 {
@@ -152,11 +157,10 @@ public class Contact {
         if(remove) //checks whether the client wants to remove the recipient
         {
             removeRecipient(length);
-            recipientAmount--;
         }
         else
         {
-            if(length < recipientAmount) //checks whether the recipient exists within the array
+            if(length < getPayeeAmount()) //checks whether the recipient exists within the array
             {
                 if(newEmail != null) //checks if client specified new email
                 {
@@ -190,7 +194,6 @@ public class Contact {
     {
         Payee addNew = new Payee(accountNumber, nickName);
         payees.add(addNew);
-        payeeAmount++;
     }
 
     /*
@@ -202,7 +205,6 @@ public class Contact {
     {
         Recipient addNew = new Recipient(email, name, phoneNumber);
         recipients.add(addNew);
-        recipientAmount++;
     }
 
     /*

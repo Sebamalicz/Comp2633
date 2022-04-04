@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
 This class contains information related to a client's debit card.
 */
