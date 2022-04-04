@@ -13,9 +13,15 @@ public class MainClass {
         // TODO Auto-generated method stub
 
         Scanner inputFile;
+
         ArrayList<Savings> saving = new ArrayList<Savings>();
-        Swing screen = new Swing();
+        Contact contacts = new Contact();
         String username, password;
+        Client newClient = null;
+        Chequing newCheq = null;
+
+        Swing screen = new Swing();
+
         boolean loginPressed = false;
         boolean loggedIn = false;
 
@@ -36,8 +42,13 @@ public class MainClass {
                     inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
                     if(checkUser(inputFile, username, password))
                     {
-                        readFile (inputFile, saving, username, password);
+                        readFile (inputFile, saving, username, password,
+                                  newClient, newCheq, contacts);
                         loggedIn = true;
+                        if(newClient.getEmail() != null)
+                        {
+                            System.out.println(newClient.getEmail());
+                        }
                     }
                 }
                 catch (FileNotFoundException e)
@@ -50,8 +61,6 @@ public class MainClass {
 
             }
         }
-
-        System.out.println("logged in finally!");
 
     }
 
@@ -72,11 +81,10 @@ public class MainClass {
         return exists;
     }
 
-    public static void readFile(Scanner input, ArrayList<Savings> saving, String username, String password)
+    public static void readFile(Scanner input, ArrayList<Savings> saving, String username, String password,
+                                Client newClient, Chequing newCheq, Contact contacts)
     {
-        Contact contacts = new Contact();
         String temp;
-        String temp2;
         String nickName;
         String email;
         int clientNum;
@@ -86,8 +94,8 @@ public class MainClass {
         double cost;
         double interestRate;
         double interestGained;
-        boolean read = true;
         char c;
+
         while(input.hasNext())
         {
             if(username.equals(input.nextLine()))
@@ -105,7 +113,7 @@ public class MainClass {
                             clientNum = Integer.parseInt(temp);
                             email = input.nextLine();
 
-                            Client newClient = new Client(clientNum, username, password, email);
+                            newClient = new Client(clientNum, username, password, email);
                         }
                         else //if end client exists then only chequing exists....
                         {
@@ -116,7 +124,7 @@ public class MainClass {
                             temp = input.nextLine();
                             balance = Double.parseDouble(temp);
 
-                            Chequing newCheq = new Chequing(cost, accNum, balance);
+                            newCheq = new Chequing(cost, accNum, balance);
 
                         }
                     }
@@ -134,7 +142,7 @@ public class MainClass {
                     temp = input.nextLine(); //read balance from file
                     balance = Double.parseDouble(temp);
 
-                    Chequing newCheq = new Chequing(cost, accNum, balance);
+                    newCheq = new Chequing(cost, accNum, balance);
                     /* end reading chequing info*/
 
 
@@ -212,6 +220,5 @@ public class MainClass {
 
         }
     }
-
 
 }
