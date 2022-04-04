@@ -79,19 +79,19 @@ public class MainClass {
                             email = input.nextLine();
                             Client newClient = new Client(clientNum, username, password, email);
                         }
-                        /* reads the ---------- */
-                        temp = input.nextLine();
+                        else
+                        {
+                             /* begin reading chequing info*/
+                            cost = Double.parseDouble(temp);
+                            temp = input.nextLine();
+                            accNum = Integer.parseInt(temp);
+                            temp = input.nextLine();
+                            balance = Double.parseDouble(temp);
+
+                            Chequing newCheq = new Chequing(cost, accNum, balance);
+                            
+                        }
                     }
-                    /* begin reading chequing info*/
-                    temp = input.nextLine();
-                    cost = Double.parseDouble(temp);
-                    temp = input.nextLine();
-                    accNum = Integer.parseInt(temp);
-                    temp = input.nextLine();
-                    balance = Double.parseDouble(temp);
-
-                    Chequing newCheq = new Chequing(cost, accNum, balance);
-
                     /* reads the ---------- */
                     temp = input.nextLine();
                     System.out.println(temp);
