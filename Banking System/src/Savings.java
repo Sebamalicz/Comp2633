@@ -22,7 +22,7 @@ public class Savings extends Account{
 
     public double calculateInterestGained()
     {
-        int gained = getBalance() * interestRate;
+        double gained = getBalance() * interestRate;
         interestGained += gained;
 
         return gained;
