@@ -17,7 +17,11 @@ public class Card {
     {
         return this.cardNumber;
     }
-
+    
+    /* 
+        Displays all the transactions related to the card. Includes date, location and
+        amount of money spent within the transaction.
+    */
     public void viewTransactions(Transaction transaction)
     {
         int length;
