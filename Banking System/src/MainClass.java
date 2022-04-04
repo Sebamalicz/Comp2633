@@ -13,42 +13,51 @@ public class MainClass {
         // TODO Auto-generated method stub
 
         Scanner inputFile;
+        Scanner checkFile;
 
-        ArrayList<Savings> saving = new ArrayList<Savings>();
-        Contact contacts = new Contact();
+        ArrayList<Savings> saving;
+        Contact contacts;
+        Client client;
+        Chequing chequing;
+        ArrayList<Credit> credit = null;
+        FileRead read;
         String username, password;
-        Client newClient = null;
-        Chequing newCheq = null;
+
 
         Swing screen = new Swing();
+        Display display;
 
         boolean loginPressed = false;
         boolean loggedIn = false;
 
         while(!loggedIn)
         {
+            System.out.println("before flush");
             while(!loginPressed)
             {
                 System.out.flush(); //flushes buffer to set loginPressed
                 loginPressed = screen.getLoginPressed();
             }
-
+            System.out.println("after flush");
             if(loginPressed)
             {
                 username = screen.getUserText();
                 password = screen.getPassText();
                 try
                 {
-                    inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
-                    if(checkUser(inputFile, username, password))
+                    checkFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
+                    if(checkUser(checkFile, username, password))
                     {
-                        readFile (inputFile, saving, username, password,
-                                  newClient, newCheq, contacts);
+                        inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
+                        read = readFile(inputFile, username, password);
                         loggedIn = true;
-                        if(newClient.getEmail() != null)
-                        {
-                            System.out.println(newClient.getEmail());
-                        }
+                        client = read.getClient();
+                        contacts = read.getContacts();
+                        chequing = read.getChequing();
+                        saving = read.getSavings();
+                        display = new Display(contacts, chequing, saving, credit);
+                        screen.disposeLogin();
+                        display.displayMenu();
                     }
                 }
                 catch (FileNotFoundException e)
@@ -81,8 +90,7 @@ public class MainClass {
         return exists;
     }
 
-    public static void readFile(Scanner input, ArrayList<Savings> saving, String username, String password,
-                                Client newClient, Chequing newCheq, Contact contacts)
+    public static FileRead readFile(Scanner input, String username, String password)
     {
         String temp;
         String nickName;
@@ -95,25 +103,27 @@ public class MainClass {
         double interestRate;
         double interestGained;
         char c;
-
+        FileRead read;
+        ArrayList<Savings> saving = new ArrayList<Savings>();
+        Contact contacts = new Contact();
+        Client client = null;
+        Chequing chequing = null;
         while(input.hasNext())
         {
-            if(username.equals(input.nextLine()))
+             if(username.equals(input.nextLine()))
             {
                 if(password.equals(input.nextLine()))
                 {
-
                     temp = input.nextLine();
                     if(temp.equalsIgnoreCase("start client"))
                     {
-
                         temp = input.nextLine();
                         if(!temp.equalsIgnoreCase("end client"))
                         {
                             clientNum = Integer.parseInt(temp);
                             email = input.nextLine();
 
-                            newClient = new Client(clientNum, username, password, email);
+                            client = new Client(clientNum, username, password, email);
                         }
                         else //if end client exists then only chequing exists....
                         {
@@ -124,7 +134,7 @@ public class MainClass {
                             temp = input.nextLine();
                             balance = Double.parseDouble(temp);
 
-                            newCheq = new Chequing(cost, accNum, balance);
+                            chequing = new Chequing(cost, accNum, balance);
 
                         }
                     }
@@ -142,13 +152,12 @@ public class MainClass {
                     temp = input.nextLine(); //read balance from file
                     balance = Double.parseDouble(temp);
 
-                    newCheq = new Chequing(cost, accNum, balance);
+                    chequing = new Chequing(cost, accNum, balance);
                     /* end reading chequing info*/
 
 
                     /* reads the ---------- */
                     temp = input.nextLine();
-
 
                     temp = input.nextLine(); //pre loop read
                     /* begin reading savings account*/
@@ -157,33 +166,26 @@ public class MainClass {
                         interestRate = Double.parseDouble(temp);
 
                         temp = input.nextLine();
-                        System.out.println(temp);
                         interestGained = Double.parseDouble(temp);
 
                         temp = input.nextLine();
-                        System.out.println(temp);
                         accNum = Integer.parseInt(temp);
 
                         temp = input.nextLine();
-                        System.out.println(temp);
                         balance = Double.parseDouble(temp);
 
                         Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
                         saving.add(newSave);
 
                         temp = input.nextLine();
-                        System.out.println(temp);
                     }
-
-                    /* begin reading the payee info*/
+                  /* begin reading the payee info*/
 
                     temp = input.nextLine();
-                    System.out.println(temp + '\n');
                     while(temp.compareTo("----------------") != 0)
                     {
                         accNum = Integer.parseInt(temp);
                         temp = input.nextLine();
-                        System.out.println(temp + '\n');
 
                         c = temp.charAt(0);
                         c = Character.toLowerCase(c);
@@ -197,12 +199,10 @@ public class MainClass {
                             contacts.addPayee(accNum, null);
                         }
                         temp = input.nextLine();
-                        System.out.println(temp + '\n');
                     }
 
                     /* begin reading recipient info*/
                     temp = input.nextLine();
-                    System.out.println(temp + '\n');
                     while(temp.compareTo("----------------") != 0)
                     {
                         email = temp;
@@ -214,11 +214,15 @@ public class MainClass {
 
                         temp = input.nextLine();
                     }
+                    read = new FileRead(client, chequing, contacts, saving);
 
+                    return read;
                 }
             }
 
         }
+
+        return null;
     }
 
 }

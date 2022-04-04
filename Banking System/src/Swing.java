@@ -163,4 +163,9 @@ public class Swing {
     {
         return this.forgotPressed;
     }
+
+    public void disposeLogin()
+    {
+        frame.dispose();
+    }
 }
