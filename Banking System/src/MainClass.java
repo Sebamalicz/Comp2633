@@ -67,16 +67,24 @@ public class MainClass {
         {
             if(username.equals(input.nextLine()))
             {
+                System.out.println(input + '\n');
+                
                 if(password.equals(input.nextLine()))
                 {
+                    System.out.println(input + '\n');
+                    
                     temp = input.nextLine();
                     if(temp.equalsIgnoreCase("start client"))
                     {
+                        System.out.println(temp + '\n');
+                        
                         temp = input.nextLine();
                         if(!temp.equalsIgnoreCase("end client"))
                         {
+                            System.out.println(temp + '\n');
                             clientNum = Integer.parseInt(temp);
                             email = input.nextLine();
+                            System.out.println(email + '\n');
                             Client newClient = new Client(clientNum, username, password, email);
                         }
                         else
@@ -95,55 +103,65 @@ public class MainClass {
                     
                     /* reads the ---------- */
                     temp = input.nextLine();
-                    System.out.println(temp);
+                    System.out.println(temp + '\n');
                     
                     /* begin reading chequing info*/
                     temp = input.nextLine();
+                    System.out.println(temp + '\n');
                     cost = Double.parseDouble(temp);
+                    
                     temp = input.nextLine();
+                    System.out.println(temp + '\n');
                     accNum = Integer.parseInt(temp);
+                    
                     temp = input.nextLine();
+                    System.out.println(temp + '\n');
                     balance = Double.parseDouble(temp);
 
                     Chequing newCheq = new Chequing(cost, accNum, balance);
                     
                     /* reads the ---------- */
                     temp = input.nextLine();
-                    System.out.println(temp);
+                    System.out.println(temp + '\n');
 
 
                     /* begin reading savings account*/
                     temp = input.nextLine();
-                    System.out.println(temp);
+                    System.out.println(temp + '\n');
                     while(temp != "----------------")
                     {
                         if(temp != "----------------")
                         {
-                        interestRate = Double.parseDouble(temp);
-                        temp = input.nextLine();
-                        System.out.println(temp);
-                        interestGained = Double.parseDouble(temp);
-                        temp = input.nextLine();
-                        System.out.println(temp);
-                        accNum = Integer.parseInt(temp);
-                        temp = input.nextLine();
-                        System.out.println(temp);
-                        balance = Double.parseDouble(temp);
+                            interestRate = Double.parseDouble(temp);
+                            temp = input.nextLine();
+                            System.out.println(temp + '\n');
+                            
+                            interestGained = Double.parseDouble(temp);
+                            temp = input.nextLine();
+                            System.out.println(temp + '\n');
+                        
+                            accNum = Integer.parseInt(temp);
+                            temp = input.nextLine();
+                            System.out.println(temp + '\n');
+                            balance = Double.parseDouble(temp);
 
-                        Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
-                        saving.add(newSave);
-                        temp = input.nextLine();
-                        System.out.println(temp);
+                            Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
+                            saving.add(newSave);
+                            temp = input.nextLine();
+                            System.out.println(temp + '\n');
                         }
                     }
 
                     /* begin reading the payee info*/
 
                     temp = input.nextLine();
+                    System.out.println(temp + '\n');
                     while(temp != "-----------------")
                     {
                         accNum = Integer.parseInt(temp);
                         temp = input.nextLine();
+                        System.out.println(temp + '\n');
+                        
                         c = temp.charAt(0);
                         c = Character.toLowerCase(c);
                         if(c >= 'a' && c <= 'z')
@@ -156,10 +174,12 @@ public class MainClass {
                             contacts.addPayee(accNum, null);
                         }
                         temp = input.nextLine();
+                        System.out.println(temp + '\n');
                     }
 
                     /* begin reading recipient info*/
                     temp = input.nextLine();
+                    System.out.println(temp + '\n');
                     while(temp != "-----------------")
                     {
                         email = temp;
