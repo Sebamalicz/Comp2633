@@ -17,42 +17,62 @@ public class MainClass {
         Swing screen = new Swing();
         String username, password;
         boolean loginPressed = false;
-//
-//        while(screen.)
-//        {
-//            loginPressed = screen.getLoginPressed();
-//            //System.out.println();
-//        }
-        while(!loginPressed)
-        {
-            loginPressed = screen.getLoginPressed();
-        }
+        boolean loggedIn = false;
 
-
-        if(loginPressed)
+        while(!loggedIn)
         {
-            System.out.println("here");
-            username = screen.getUserText();
-            password = screen.getPassText();
-            try
+            while(!loginPressed)
             {
-                inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
-                readFile (inputFile, saving, username, password);
-                System.out.println(saving.get(0).getAccountNumber());
+                System.out.flush(); //flushes buffer to set loginPressed
+                loginPressed = screen.getLoginPressed();
             }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        else if(screen.getForgetPressed())
-        {
 
+            if(loginPressed)
+            {
+                username = screen.getUserText();
+                password = screen.getPassText();
+                try
+                {
+                    inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
+                    if(checkUser(inputFile, username, password))
+                    {
+                        readFile (inputFile, saving, username, password);
+                        loggedIn = true;
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            else if(screen.getForgetPressed())
+            {
+
+            }
         }
+
+        System.out.println("logged in finally!");
 
     }
 
-    public static boolean readFile(Scanner input, ArrayList<Savings> saving, String username, String password)
+    public static boolean checkUser(Scanner input, String username, String password)
+    {
+        boolean exists = false;
+        while(input.hasNext())
+        {
+            if(username.equals(input.nextLine()))
+            {
+                if(password.equals(input.nextLine()))
+                {
+                    exists = true;
+                }
+            }
+        }
+
+        return exists;
+    }
+
+    public static void readFile(Scanner input, ArrayList<Savings> saving, String username, String password)
     {
         Contact contacts = new Contact();
         String temp;
@@ -72,27 +92,22 @@ public class MainClass {
         {
             if(username.equals(input.nextLine()))
             {
-                System.out.println(input);
-
                 if(password.equals(input.nextLine()))
                 {
-                    System.out.println(input);
 
                     temp = input.nextLine();
                     if(temp.equalsIgnoreCase("start client"))
                     {
-                        System.out.println(temp + '\n');
 
                         temp = input.nextLine();
                         if(!temp.equalsIgnoreCase("end client"))
                         {
-                            System.out.println(temp + '\n');
                             clientNum = Integer.parseInt(temp);
                             email = input.nextLine();
-                            System.out.println(email + '\n');
+
                             Client newClient = new Client(clientNum, username, password, email);
                         }
-                        else
+                        else //if end client exists then only chequing exists....
                         {
                              /* begin reading chequing info*/
                             cost = Double.parseDouble(temp);
@@ -109,30 +124,25 @@ public class MainClass {
                     /* reads the ---------- */
                     temp = input.nextLine();
 
-                    System.out.println(temp);
-
                     /* begin reading chequing info*/
-                    temp = input.nextLine();
-                    System.out.println(temp + '\n');
+                    temp = input.nextLine(); //read cost from file
                     cost = Double.parseDouble(temp);
 
-                    temp = input.nextLine();
-                    System.out.println(temp + '\n');
+                    temp = input.nextLine(); //read account number from file
                     accNum = Integer.parseInt(temp);
 
-                    temp = input.nextLine();
-                    System.out.println(temp + '\n');
+                    temp = input.nextLine(); //read balance from file
                     balance = Double.parseDouble(temp);
 
                     Chequing newCheq = new Chequing(cost, accNum, balance);
+                    /* end reading chequing info*/
+
 
                     /* reads the ---------- */
                     temp = input.nextLine();
-                    System.out.println(temp + '\n');
 
 
-                    temp = input.nextLine();
-                    System.out.println(temp);
+                    temp = input.nextLine(); //pre loop read
                     /* begin reading savings account*/
                     while (temp.compareTo("----------------") != 0)
                     {
@@ -198,17 +208,9 @@ public class MainClass {
                     }
 
                 }
-                else
-                {
-                    read = false;
-                }
             }
-            else
-            {
-                read = false;
-            }
+
         }
-        return read;
     }
 
 

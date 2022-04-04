@@ -59,9 +59,9 @@ public class Swing {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                setLoginPressed();
                 userInput = userName.getText();
                 passInput = pass.getText();
+                setLoginPressed();
             }
         });
 
