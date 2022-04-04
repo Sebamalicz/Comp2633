@@ -100,19 +100,26 @@ public class MainClass {
                     /* begin reading savings account*/
                     temp = input.nextLine();
                     System.out.println(temp);
-                    while(temp != "-----------------")
+                    while(temp != "----------------")
                     {
+                        if(temp != "----------------")
+                        {
                         interestRate = Double.parseDouble(temp);
                         temp = input.nextLine();
+                        System.out.println(temp);
                         interestGained = Double.parseDouble(temp);
                         temp = input.nextLine();
+                        System.out.println(temp);
                         accNum = Integer.parseInt(temp);
                         temp = input.nextLine();
+                        System.out.println(temp);
                         balance = Double.parseDouble(temp);
 
                         Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
                         saving.add(newSave);
                         temp = input.nextLine();
+                        System.out.println(temp);
+                        }
                     }
 
                     /* begin reading the payee info*/
