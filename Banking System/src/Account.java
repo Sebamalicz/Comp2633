@@ -124,7 +124,24 @@ public class Account {
                 System.out.println("------------------------------------------------------");
             }
         }
+    }
+    
+    public boolean setUpRecurrPayments(Payee payee, double amount, String date)
+    {
+        boolean setUpSuccess = false;
+        if (payee != null)
+        {
+            System.out.println("Recurring payment successfully set up.");
+            if (payee.getNickName() != null)
+            {
+                System.out.println("A payment of " + amount + "will be made to " + payee.getNickName() + " every month after " + date);
+            } else
+            {
+                System.out.println("A payment of " + amount + "will be made to account number " + payee.getAccountNumber() + " every month after " + date);
+            }
+        }
 
+        return setUpSuccess;
     }
     
     public void enableAutoDeposit()
