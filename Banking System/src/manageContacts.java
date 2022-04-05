@@ -1,4 +1,4 @@
 
-public class manageContacts {
+public class manageContacts extends Display{
 
 }
