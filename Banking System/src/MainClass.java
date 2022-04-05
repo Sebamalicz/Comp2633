@@ -280,7 +280,15 @@ public class MainClass {
 
     public static ArrayList<Transaction> getTransactions(int accountNumber)
     {
-        Scanner input = new Scanner();
+        Scanner input;
+        try
+        {
+            input = new Scanner(new File("C:J\User\smska\Desktop\transactions.txt"))
+        } 
+        catch
+        {
+            e.printStackTrace();
+        }
 
         String target = Integer.toString(accountNumber);
         String temp;
