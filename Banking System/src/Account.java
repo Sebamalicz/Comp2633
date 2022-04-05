@@ -151,6 +151,7 @@ public class Account {
             {
                 System.out.println("A payment of " + amount + "will be made to account number " + payee.getAccountNumber() + " every month after " + date);
             }
+            setUpSuccess = true;
         }
 
         return setUpSuccess;
