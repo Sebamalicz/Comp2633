@@ -125,13 +125,14 @@ public class MainMenu extends Display{
         if(credit != null)
         {
             int credits = 0;
-            text = new JTextArea("Saving Accounts");
-            text.setBounds(30, initialY + (i * 50), 100, 30);
+            text = new JTextArea("Credit Cards");
+            text.setBounds(30, initialY + (i * 50) + 50, 100, 30);
             frame.add(text);
             while(i < (temp + credit.size()))
             {
+                System.out.println(i + credit.size());
                 view.add(new JButton("View"));
-                view.get(i).setBounds(initialX, initialY + (i * 40), 100, 30);
+                view.get(i).setBounds(initialX, initialY + (i * 50) + 100, 100, 30);
                 view.get(i).addActionListener(new ActionListener()
                 {
                     //allows the clicking of view for credit accounts
@@ -157,6 +158,7 @@ public class MainMenu extends Display{
                 text.setBounds(240, initialY + (i * 50) + 100, 200, 30);
                 frame.add(text);
                 frame.add(view.get(i));
+                i++;
             }
         }
     }

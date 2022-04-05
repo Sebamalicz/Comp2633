@@ -19,7 +19,7 @@ public class MainClass {
         Contact contacts;
         Client client;
         Chequing chequing;
-        ArrayList<Credit> credit = null;
+        ArrayList<Credit> credit;
         FileRead read;
         String username, password;
 
@@ -54,6 +54,7 @@ public class MainClass {
                         contacts = read.getContacts();
                         chequing = read.getChequing();
                         saving = read.getSavings();
+                        credit = read.getCards();
                         display = new Display(contacts, chequing, saving, credit);
                         screen.disposeLogin();
                         display.displayMenu();
@@ -143,7 +144,9 @@ public class MainClass {
                             temp = input.nextLine();
                             balance = Double.parseDouble(temp);
 
-                            chequing = new Chequing(cost, accNum, balance);
+                            transList = getTransactions(accNum);
+
+                            chequing = new Chequing(cost, accNum, balance, transList);
 
                         }
                     }
@@ -160,7 +163,7 @@ public class MainClass {
 
                     temp = input.nextLine(); //read balance from file
                     balance = Double.parseDouble(temp);
-                    
+
                     transList = getTransactions(accNum);
 
                     chequing = new Chequing(cost, accNum, balance, transList);
@@ -185,7 +188,7 @@ public class MainClass {
 
                         temp = input.nextLine();
                         balance = Double.parseDouble(temp);
-                        
+
                         transList = getTransactions(accNum);
 
                         Savings newSave = new Savings(interestRate, interestGained, accNum, balance, transList);
@@ -202,13 +205,14 @@ public class MainClass {
                     {
                         cardNum = Integer.parseInt(temp);
                         temp = input.nextLine();
+
                         balance = Double.parseDouble(temp);
                         temp = input.nextLine();
+
                         creditLimit = Double.parseDouble(temp);
                         temp = input.nextLine();
-                        interestRate = Double.parseDouble(temp);
 
-                        temp = input.nextLine();
+                        interestRate = Double.parseDouble(temp);
 
                         transList = getTransactions(cardNum);
 
@@ -267,47 +271,50 @@ public class MainClass {
 
     public static ArrayList<Transaction> getTransactions(int accountNumber)
     {
-        Scanner input;
-        try
-        {
-            input = new Scanner(new File("C:J\User\smska\Desktop\transactions.txt"))
-        } 
-        catch
-        {
-            e.printStackTrace();
-        }
-
         String target = Integer.toString(accountNumber);
         String temp;
         String date;
         String general;
         double cost;
         ArrayList<Transaction> transList = new ArrayList<Transaction>();
-        while(input.hasNext())
+        Scanner input;
+        try
         {
-            temp = input.nextLine();
-            //finds the account number
-            while(temp.compareTo(target) != 0)
+            input = new Scanner(new File("C:\\Users\\smska\\Desktop\\transactions.txt"));
+            while(input.hasNext())
             {
                 temp = input.nextLine();
-            }
+                System.out.println(temp);
+                System.out.println(target);
+                //finds the account number
+                while(temp.compareTo(target) != 0 && input.hasNext())
+                {
+                    temp = input.nextLine();
+                }
+                if(temp.compareTo(target) == 0)
+                {
+                    temp = input.nextLine();
+                    // reads subsequent transactions until ----... indicating a new account number
+                    while(temp.compareTo("----------------") != 0)
+                    {
+                        date = temp;
+                        general = input.nextLine();
+                        temp = input.nextLine();
+                        cost = Double.parseDouble(temp);
 
-            temp = input.nextLine();
-            // reads subsequent transactions until ----... indicating a new account number
-            while(temp.compareTo("----------------") != 0)
-            {
-                date = temp;
-                general = input.nextLine();
-                temp = input.nextLine();
-                cost = Double.parseDouble(temp);
+                        Transaction newTrans = new Transaction(date, general, cost);
+                        transList.add(newTrans);
 
-                Transaction newTrans = new Transaction(date, general, cost);
-                transList.add(newTrans);
-
-                temp = input.nextLine();
+                        temp = input.nextLine();
+                    }
+                }
             }
 
             return transList;
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
         }
 
         return null;
