@@ -3,9 +3,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /*
@@ -31,6 +37,17 @@ public class Swing{
         Login = new JButton("Login");
         ForgotPassword = new JButton("Forgot Password");
         frame = new JFrame();
+        BufferedImage image;
+
+        try { //print the image onto the login screen
+            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\SES_Banking.png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            label.setBounds(100, 25, 400, 250); //x axis, y axis, width, height
+            frame.add(label);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(background);//set background Color
