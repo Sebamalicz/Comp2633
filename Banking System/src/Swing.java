@@ -82,7 +82,7 @@ public class Swing{
             {
                 userInput = userName.getText();
                 passInput = pass.getText();
-                setLoginPressed();
+                setLoginPressed(true);
             }
         });
 
@@ -160,9 +160,9 @@ public class Swing{
         frame.add(pass);
     }
 
-    private void setLoginPressed()
+    public void setLoginPressed(boolean set)
     {
-        this.loginPressed = true;
+        this.loginPressed = set;
     }
 
     private void setForgotPressed()
@@ -188,6 +188,11 @@ public class Swing{
     public boolean getForgetPressed()
     {
         return this.forgotPressed;
+    }
+
+    public JFrame getFrame()
+    {
+        return this.frame;
     }
 
     /*

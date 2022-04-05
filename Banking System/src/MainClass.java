@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 /*
  * This Class Handles all of the Banking System Components, such as login
  * editing info, and checking all of users banking info.
@@ -63,6 +65,8 @@ public class MainClass {
                     else
                     {
                         loginPressed = false;
+                        screen.setLoginPressed(false);
+                        JOptionPane.showMessageDialog(screen.getFrame(), "Incorrect Username or Password");
                     }
                 }
                 catch (FileNotFoundException e)

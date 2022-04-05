@@ -4,6 +4,7 @@ public class Display {
     private Swing login;
     private MainMenu menu;
     private transactionScreen trans;
+    private Settings setting;
     private Contact contacts;
     private Chequing chequings;
     private ArrayList<Savings> savings;
@@ -17,6 +18,11 @@ public class Display {
     public void displayMenu()
     {
         menu = new MainMenu(contacts, chequings, savings, credit);
+    }
+
+    public void displaySetting()
+    {
+        setting = new Settings();
     }
 
     public void setContacts(Contact contacts)

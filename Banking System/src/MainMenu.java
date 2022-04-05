@@ -11,13 +11,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
 
 public class MainMenu extends Display{
 
     private JFrame frame;
     private ArrayList<JButton> view;
-    private JTextArea text;
+    private JButton settings;
+    private JLabel text;
     private Color background;
     private int initialX, initialY;
 
@@ -61,6 +62,7 @@ public class MainMenu extends Display{
         i = createChequing(chequing, i);
         i = createSaving(saving, i);
         createCredit(credit, i, savingSize);
+        createSettings();
 
     }
 
@@ -75,21 +77,29 @@ public class MainMenu extends Display{
             //allows the clicking of view for chequing
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                transactionScreen screen = new transactionScreen(chequing);
-                screen.setChequings(getChequing());
-                screen.setContacts(getContacts());
-                screen.setCredit(getCredit());
-                screen.setSavings(getSavings());
+                if(chequing.getTransactionAmount() != 0)
+                {
+                    frame.dispose();
+                    transactionScreen screen = new transactionScreen(chequing);
+                    screen.setChequings(getChequing());
+                    screen.setContacts(getContacts());
+                    screen.setCredit(getCredit());
+                    screen.setSavings(getSavings());
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(frame, "No Transactions for " +
+                            chequing.getAccountNumber());
+                }
             }
         });
-        text = new JTextArea("Chequing Account");
-        text.setBounds(30, initialY - (i * 50) - 50, 100, 30);
+        text = new JLabel("Chequing Account");
+        text.setBounds(30, initialY - (i * 50) - 50, 200, 30);
         frame.add(text);
-        text = new JTextArea("Account Number: " + String.valueOf(chequing.getAccountNumber()));
+        text = new JLabel("Account Number: " + String.valueOf(chequing.getAccountNumber()));
         text.setBounds(30, initialY + (i * 50), 200, 30);
         frame.add(text);
-        text = new JTextArea("Balance: " + String.valueOf(chequing.getBalance()));
+        text = new JLabel("Balance: " + String.valueOf(chequing.getBalance()));
         text.setBounds(240, initialY + (i * 50), 200, 30);
         frame.add(text);
         frame.add(view.get(i));
@@ -103,7 +113,7 @@ public class MainMenu extends Display{
         if(saving != null)
         {
             int savings = 0;
-            text = new JTextArea("Saving Accounts");
+            text = new JLabel("Saving Accounts");
             text.setBounds(30, initialY + (i * 50), 100, 30);
             frame.add(text);
             while(i < (saving.size() + 1))
@@ -124,22 +134,27 @@ public class MainMenu extends Display{
                                i = view.size();
                           }
                        }
-                       System.out.println(saving.get(savingNumber).getBalance());
-                       System.out.println(savingNumber);
-
-
-                       frame.dispose();
-                       transactionScreen screen = new transactionScreen(saving.get(savingNumber));
-                       screen.setChequings(getChequing());
-                       screen.setContacts(getContacts());
-                       screen.setCredit(getCredit());
-                       screen.setSavings(getSavings());
+                       //checks if transaction exits, if yes display
+                       if(saving.get(savingNumber).getTransactionAmount() != 0)
+                       {
+                           frame.dispose();
+                           transactionScreen screen = new transactionScreen(saving.get(savingNumber));
+                           screen.setChequings(getChequing());
+                           screen.setContacts(getContacts());
+                           screen.setCredit(getCredit());
+                           screen.setSavings(getSavings());
+                       }
+                       else //if no display message that no transactions exit for saving account number
+                       {
+                           JOptionPane.showMessageDialog(frame, "No Transactions for " +
+                                   saving.get(savingNumber).getAccountNumber());
+                       }
                     }
                 });
-                text = new JTextArea("Account Number: " + String.valueOf(saving.get(savings).getAccountNumber()));
+                text = new JLabel("Account Number: " + String.valueOf(saving.get(savings).getAccountNumber()));
                 text.setBounds(30, initialY + (i * 50) + 50, 200, 30);
                 frame.add(text);
-                text = new JTextArea("Balance: " + String.valueOf(saving.get(savings).getBalance()));
+                text = new JLabel("Balance: " + String.valueOf(saving.get(savings).getBalance()));
                 text.setBounds(240, initialY + (i * 50) + 50, 200, 30);
                 frame.add(text);
                 frame.add(view.get(i));
@@ -158,7 +173,7 @@ public class MainMenu extends Display{
         if(credit != null)
         {
             int credits = 0;
-            text = new JTextArea("Credit Cards");
+            text = new JLabel("Credit Cards");
             text.setBounds(30, initialY + (i * 50) + 50, 100, 30);
             frame.add(text);
             while(i < (temp + credit.size()))
@@ -179,18 +194,27 @@ public class MainMenu extends Display{
                                 i = view.size();
                             }
                         }
-                        frame.dispose();
-                        transactionScreen screen = new transactionScreen(credit.get(creditNumber));
-                        screen.setChequings(getChequing());
-                        screen.setContacts(getContacts());
-                        screen.setCredit(getCredit());
-                        screen.setSavings(getSavings());
+                        //checks if transactions exist, if yes display
+                        if(credit.get(creditNumber).getTransactionAmount() != 0)
+                        {
+                            frame.dispose();
+                            transactionScreen screen = new transactionScreen(credit.get(creditNumber));
+                            screen.setChequings(getChequing());
+                            screen.setContacts(getContacts());
+                            screen.setCredit(getCredit());
+                            screen.setSavings(getSavings());
+                        }
+                        else //if no display no transactions message for credit card number
+                        {
+                            JOptionPane.showMessageDialog(frame, "No Transactions for " +
+                                                            credit.get(creditNumber).getCardNumber());
+                        }
                     }
                 });
-                text = new JTextArea("Credit Card #: " + String.valueOf(credit.get(credits).getCardNumber()));
+                text = new JLabel("Credit Card #: " + String.valueOf(credit.get(credits).getCardNumber()));
                 text.setBounds(30, initialY + (i * 50) + 100, 200, 30);
                 frame.add(text);
-                text = new JTextArea("Balance: " + String.valueOf(credit.get(credits).getBalanceToPay()));
+                text = new JLabel("Balance: " + String.valueOf(credit.get(credits).getBalanceToPay()));
                 text.setBounds(240, initialY + (i * 50) + 100, 200, 30);
                 frame.add(text);
                 frame.add(view.get(i));
@@ -199,4 +223,26 @@ public class MainMenu extends Display{
             }
         }
     }
+
+    private void createSettings()
+    {
+        settings = new JButton("Settings");
+        settings.setBounds(400, 20, 100, 30);
+        settings.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                Settings screen = new Settings();
+                screen.setChequings(getChequing());
+                screen.setContacts(getContacts());
+                screen.setCredit(getCredit());
+                screen.setSavings(getSavings());
+            }
+        });
+
+        frame.add(settings);
+    }
+
+
 }
