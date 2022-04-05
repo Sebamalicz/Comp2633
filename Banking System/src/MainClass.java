@@ -203,6 +203,7 @@ public class MainClass {
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
+
                         cardNum = Integer.parseInt(temp);
                         temp = input.nextLine();
 
@@ -216,8 +217,7 @@ public class MainClass {
 
                         transList = getTransactions(cardNum);
 
-                        Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, transList);
-                        creditCards.add(credCard);
+                        creditCards.add(new Credit(balance, creditLimit, interestRate, cardNum, transList));
 
                         temp = input.nextLine();
 
@@ -284,8 +284,6 @@ public class MainClass {
             while(input.hasNext())
             {
                 temp = input.nextLine();
-                System.out.println(temp);
-                System.out.println(target);
                 //finds the account number
                 while(temp.compareTo(target) != 0 && input.hasNext())
                 {

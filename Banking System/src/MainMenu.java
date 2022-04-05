@@ -1,10 +1,16 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 public class MainMenu extends Display{
@@ -23,6 +29,16 @@ public class MainMenu extends Display{
         view = new ArrayList<JButton>();
         background = new Color(9, 97, 146);
         frame = new JFrame();
+        BufferedImage image;
+
+        try { //print the header onto the login screen
+            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\mainMenuHeader.png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            label.setBounds(0, 0, 600, 130);
+            frame.add(label);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(background);
@@ -112,6 +128,7 @@ public class MainMenu extends Display{
                 frame.add(text);
                 frame.add(view.get(i));
                 i++;
+                savings++;
             }
         }
 
@@ -130,7 +147,6 @@ public class MainMenu extends Display{
             frame.add(text);
             while(i < (temp + credit.size()))
             {
-                System.out.println(i + credit.size());
                 view.add(new JButton("View"));
                 view.get(i).setBounds(initialX, initialY + (i * 50) + 100, 100, 30);
                 view.get(i).addActionListener(new ActionListener()
@@ -151,7 +167,7 @@ public class MainMenu extends Display{
                         transactionScreen screen = new transactionScreen(credit.get(creditNumber));
                     }
                 });
-                text = new JTextArea("Account Number: " + String.valueOf(credit.get(credits).getCardNumber()));
+                text = new JTextArea("Credit Card #: " + String.valueOf(credit.get(credits).getCardNumber()));
                 text.setBounds(30, initialY + (i * 50) + 100, 200, 30);
                 frame.add(text);
                 text = new JTextArea("Balance: " + String.valueOf(credit.get(credits).getBalanceToPay()));
@@ -159,6 +175,7 @@ public class MainMenu extends Display{
                 frame.add(text);
                 frame.add(view.get(i));
                 i++;
+                credits++;
             }
         }
     }
