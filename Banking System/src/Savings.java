@@ -3,9 +3,9 @@ public class Savings extends Account{
     final private double interestRate;
     private double interestGained;
 
-    public Savings (double interestRate, double interestGained, int accountNumber, double balance)
+    public Savings (double interestRate, double interestGained, int accountNumber, double balance, ArrayList<Transaction> transactions)
     {
-        super(accountNumber, balance);
+        super(accountNumber, balance, transactions);
         this.interestRate = interestRate;
         this.interestGained = interestGained;
     }
