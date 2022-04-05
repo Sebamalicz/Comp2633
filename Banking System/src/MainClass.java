@@ -170,7 +170,7 @@ public class MainClass {
 
                     temp = input.nextLine(); //pre loop read
                     /* begin reading savings account*/
-                    
+
                     while (temp.compareTo("----------------") != 0)
                     {
                         interestRate = Double.parseDouble(temp);
@@ -189,9 +189,9 @@ public class MainClass {
 
                         temp = input.nextLine();
                     }
-                    
+
                     /* begin reading transactions*/
-                    
+
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
@@ -200,16 +200,16 @@ public class MainClass {
                         general = temp;
                         temp = input.nextLine();
                         cost = Double.parseDouble(temp);
-                        
+
                         Transaction newTrans = new Transaction(date, general, cost);
                         transList.add(newTrans);
-                        
+
                         temp = input.nextLine();
                     }
-                    
-                    
+
+
                     /* begin reading credit card info*/
-                   
+
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
@@ -220,16 +220,16 @@ public class MainClass {
                         creditLimit = Double.parseDouble(temp);
                         temp = input.nextLine();
                         interestRate = Double.parseDouble(temp);
-                        
+
                         temp = input.nextLine();
-                        
+
                         //transaction_list = getTransactions(cardNum);
-                        
+
                         Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, transList);
                         creditCards.add(credCard);
-                        
+
                         temp = input.nextLine();
-                        
+
                     }
                   /* begin reading the payee info*/
 
@@ -254,7 +254,7 @@ public class MainClass {
                     }
 
                     /* begin reading recipient info*/
-                    
+
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
@@ -277,11 +277,11 @@ public class MainClass {
 
         return null;
     }
-    
+
     public static ArrayList<Transaction> getTransactions(int accountNumber)
     {
         Scanner input = new Scanner();
-        
+
         String target = Integer.toString(accountNumber);
         String temp;
         String date;
@@ -296,7 +296,7 @@ public class MainClass {
             {
                 temp = input.nextLine();
             }
-            
+
             temp = input.nextLine();
             // reads subsequent transactions until ----... indicating a new account number
             while(temp.compareTo("----------------") != 0)
@@ -305,18 +305,18 @@ public class MainClass {
                 general = input.nextLine();
                 temp = input.nextLine();
                 cost = Double.parseDouble(temp);
-                
+
                 Transaction newTrans = new Transaction(date, general, cost);
                 transList.add(newTrans);
-                
+
                 temp = input.nextLine();
             }
-            
+
             return transList;
         }
-        
+
         return null;
-        
+
     }
 
 }
