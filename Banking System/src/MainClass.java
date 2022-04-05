@@ -160,8 +160,10 @@ public class MainClass {
 
                     temp = input.nextLine(); //read balance from file
                     balance = Double.parseDouble(temp);
+                    
+                    transList = getTransactions(accNum);
 
-                    chequing = new Chequing(cost, accNum, balance);
+                    chequing = new Chequing(cost, accNum, balance, transList);
                     /* end reading chequing info*/
 
 
@@ -183,26 +185,11 @@ public class MainClass {
 
                         temp = input.nextLine();
                         balance = Double.parseDouble(temp);
+                        
+                        transList = getTransactions(accNum);
 
-                        Savings newSave = new Savings(interestRate, interestGained, accNum, balance);
+                        Savings newSave = new Savings(interestRate, interestGained, accNum, balance, transList);
                         saving.add(newSave);
-
-                        temp = input.nextLine();
-                    }
-
-                    /* begin reading transactions*/
-
-                    temp = input.nextLine();
-                    while(temp.compareTo("----------------") != 0)
-                    {
-                        date = temp;
-                        temp = input.nextLine();
-                        general = temp;
-                        temp = input.nextLine();
-                        cost = Double.parseDouble(temp);
-
-                        Transaction newTrans = new Transaction(date, general, cost);
-                        transList.add(newTrans);
 
                         temp = input.nextLine();
                     }
@@ -223,7 +210,7 @@ public class MainClass {
 
                         temp = input.nextLine();
 
-                        //transaction_list = getTransactions(cardNum);
+                        transList = getTransactions(cardNum);
 
                         Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, transList);
                         creditCards.add(credCard);
