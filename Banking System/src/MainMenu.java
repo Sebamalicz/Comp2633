@@ -5,20 +5,20 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 public class MainMenu {
 
     private JFrame frame;
     private ArrayList<JButton> view;
-    private Savings selectedS;
-    private Credit selectedCr;
+    private JTextArea text;
     private Color background;
     private int initialX, initialY;
 
     public MainMenu(Chequing chequing, ArrayList<Savings> saving, ArrayList<Credit> credit)
     {
         initialX = 450;
-        initialY = 30;
+        initialY = 200;
         view = new ArrayList<JButton>();
         background = new Color(9, 97, 146);
         frame = new JFrame();
@@ -58,6 +58,15 @@ public class MainMenu {
                 transactionScreen screen = new transactionScreen(chequing);
             }
         });
+        text = new JTextArea("Chequing Account");
+        text.setBounds(30, initialY - (i * 50) - 50, 100, 30);
+        frame.add(text);
+        text = new JTextArea("Account Number: " + String.valueOf(chequing.getAccountNumber()));
+        text.setBounds(30, initialY + (i * 50), 200, 30);
+        frame.add(text);
+        text = new JTextArea("Balance: " + String.valueOf(chequing.getBalance()));
+        text.setBounds(240, initialY + (i * 50), 200, 30);
+        frame.add(text);
         frame.add(view.get(i));
         i++;
         return i;
@@ -68,10 +77,14 @@ public class MainMenu {
         //add savings account view buttons to screen (if multiple exist/ or single)
         if(saving != null)
         {
+            int savings = 0;
+            text = new JTextArea("Saving Accounts");
+            text.setBounds(30, initialY + (i * 50), 100, 30);
+            frame.add(text);
             while(i < (saving.size() + 1))
             {
                 view.add(new JButton("View"));
-                view.get(i).setBounds(initialX, initialY + (i * 50), 100, 30);
+                view.get(i).setBounds(initialX, initialY + (i * 50) + 50, 100, 30);
                 view.get(i).addActionListener(new ActionListener()
                 {
                     //allows the clicking of view for savings accounts
@@ -90,6 +103,12 @@ public class MainMenu {
                        transactionScreen screen = new transactionScreen(saving.get(savingNumber));
                     }
                 });
+                text = new JTextArea("Account Number: " + String.valueOf(saving.get(savings).getAccountNumber()));
+                text.setBounds(30, initialY + (i * 50) + 50, 200, 30);
+                frame.add(text);
+                text = new JTextArea("Balance: " + String.valueOf(saving.get(savings).getBalance()));
+                text.setBounds(240, initialY + (i * 50) + 50, 200, 30);
+                frame.add(text);
                 frame.add(view.get(i));
                 i++;
             }
@@ -104,6 +123,10 @@ public class MainMenu {
         int temp = i;
         if(credit != null)
         {
+            int credits = 0;
+            text = new JTextArea("Saving Accounts");
+            text.setBounds(30, initialY + (i * 50), 100, 30);
+            frame.add(text);
             while(i < (temp + credit.size()))
             {
                 view.add(new JButton("View"));
@@ -126,6 +149,12 @@ public class MainMenu {
                         transactionScreen screen = new transactionScreen(credit.get(creditNumber));
                     }
                 });
+                text = new JTextArea("Account Number: " + String.valueOf(credit.get(credits).getCardNumber()));
+                text.setBounds(30, initialY + (i * 50) + 100, 200, 30);
+                frame.add(text);
+                text = new JTextArea("Balance: " + String.valueOf(credit.get(credits).getBalanceToPay()));
+                text.setBounds(240, initialY + (i * 50) + 100, 200, 30);
+                frame.add(text);
                 frame.add(view.get(i));
             }
         }
