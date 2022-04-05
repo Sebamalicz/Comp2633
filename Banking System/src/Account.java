@@ -10,7 +10,7 @@ public class Account {
     private double balance;
     private ArrayList<Transaction> transactions;
     private boolean autoDeposit;
-    private Contact contacts;
+    private Contact contacts; 
 
 
     public Account(int accountNumber, double balance, ArrayList<Transaction> transactions) {
