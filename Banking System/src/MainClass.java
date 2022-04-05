@@ -100,6 +100,7 @@ public class MainClass {
         String email;
         int clientNum;
         int accNum;
+        int cardNum;
         int phone;
         double balance;
         double cost;
@@ -240,7 +241,7 @@ public class MainClass {
 
                         temp = input.nextLine();
                     }
-                    read = new FileRead(client, chequing, contacts, saving);
+                    read = new FileRead(client, chequing, contacts, saving, creditCards);
 
                     return read;
                 }
