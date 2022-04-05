@@ -223,6 +223,8 @@ public class MainClass {
                         
                         temp = input.nextLine();
                         
+                        //transaction_list = getTransactions(cardNum);
+                        
                         Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, transList);
                         creditCards.add(credCard);
                         
@@ -276,5 +278,45 @@ public class MainClass {
         return null;
     }
     
+    public static ArrayList<Transaction> getTransactions(int accountNumber)
+    {
+        Scanner input = new Scanner();
+        
+        String target = Integer.toString(accountNumber);
+        String temp;
+        String date;
+        String general;
+        double cost;
+        ArrayList<Transaction> transList = new ArrayList<Transaction>();
+        while(input.hasNext())
+        {
+            temp = input.nextLine();
+            //finds the account number
+            while(temp.compareTo(target) != 0)
+            {
+                temp = input.nextLine();
+            }
+            
+            temp = input.nextLine();
+            // reads subsequent transactions until ----... indicating a new account number
+            while(temp.compareTo("----------------") != 0)
+            {
+                date = temp;
+                general = input.nextLine();
+                temp = input.nextLine();
+                cost = Double.parseDouble(temp);
+                
+                Transaction newTrans = new Transaction(date, general, cost);
+                transList.add(newTrans);
+                
+                temp = input.nextLine();
+            }
+            
+            return transList;
+        }
+        
+        return null;
+        
+    }
 
 }
