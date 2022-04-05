@@ -105,9 +105,11 @@ public class MainClass {
         double cost;
         double interestRate;
         double interestGained;
+        double creditLimit;
         char c;
         FileRead read;
         ArrayList<Savings> saving = new ArrayList<Savings>();
+        ArrayList<Credit> creditCards = new ArrayList<Credit>();
         Contact contacts = new Contact();
         Client client = null;
         Chequing chequing = null;
@@ -181,6 +183,27 @@ public class MainClass {
                         saving.add(newSave);
 
                         temp = input.nextLine();
+                    }
+                    
+                    /* begin reading credit card info*/
+                    temp = input.nextLine();
+                    while(temp.compareTo("----------------") != 0)
+                    {
+                        cardNum = Integer.parseInt(temp);
+                        temp = input.nextLine();
+                        balance = Double.parseDouble(temp);
+                        temp = input.nextLine();
+                        creditLimit = Double.parseDouble(temp);
+                        temp = input.nextLine();
+                        interestRate = Double.parseDouble(temp);
+                        
+                        temp = input.nextLine();
+                        
+                        Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, null);
+                        creditCards.add(credCard);
+                        
+                        temp = input.nextLine();
+                        
                     }
                   /* begin reading the payee info*/
 
