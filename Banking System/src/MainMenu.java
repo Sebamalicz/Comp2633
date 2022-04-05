@@ -23,7 +23,10 @@ public class MainMenu extends Display{
 
     public MainMenu(Contact contacts, Chequing chequing, ArrayList<Savings> saving, ArrayList<Credit> credit)
     {
-        super(contacts, chequing, saving, credit);
+        setContacts(contacts);
+        setChequings(chequing);
+        setSavings(saving);
+        setCredit(credit);
         initialX = 450;
         initialY = 200;
         view = new ArrayList<JButton>();
