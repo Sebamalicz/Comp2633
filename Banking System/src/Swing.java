@@ -15,7 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /*
- *
+ * This class deals with the Login page section of the banking system. Deals
+ * with the GUI components such as login button, forgot password button,
+ * as well as entering username and password. This then allows the user to
+ * login to their account making sure the login information is checked with
+ * the information in the system.
  */
 public class Swing{
 
@@ -95,6 +99,11 @@ public class Swing{
         frame.add(ForgotPassword);
     }
 
+    /*
+     * This function creates the initial text boxes that the user may input their
+     * information into. Username and password, which are then stored into class
+     * variables.
+     */
     private void createInitialTextInputBoxes()
     {
         userName = new JTextField("Username");
@@ -181,6 +190,10 @@ public class Swing{
         return this.forgotPressed;
     }
 
+    /*
+     * This function allows for the disposal of the frame in case
+     * that switching of screens is being performed.
+     */
     public void disposeLogin()
     {
         frame.dispose();
