@@ -13,11 +13,12 @@ public class Account {
     private Contact contacts;
 
 
-    public Account(int accountNumber, double balance) {
+    public Account(int accountNumber, double balance, ArrayList<Transaction> transactions) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.autoDeposit = false;
         this.contacts = null;
+        this.transactions = transactions;
     }
 
     public int getAccountNumber() {
