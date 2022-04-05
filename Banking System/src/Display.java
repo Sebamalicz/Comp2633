@@ -38,4 +38,24 @@ public class Display {
     {
         this.credit = credit;
     }
+
+    public Contact getContacts()
+    {
+        return this.contacts;
+    }
+
+    public Chequing getChequing()
+    {
+        return this.chequings;
+    }
+
+    public ArrayList<Savings> getSavings()
+    {
+        return this.savings;
+    }
+
+    public ArrayList<Credit> getCredit()
+    {
+        return this.credit;
+    }
 }

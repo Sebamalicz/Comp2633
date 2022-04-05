@@ -48,10 +48,15 @@ public class transactionScreen extends Display{
         frame.getContentPane().setBackground(background);
 
         createBackButton();
-        }
+
+        frame.setSize(600, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     private void createBackButton()
     {
 
+    }
 }
