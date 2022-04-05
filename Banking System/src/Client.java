@@ -1,5 +1,5 @@
 /*
- * This class handles all of the Clients purposes
+ * This class handles all of the clients' purposes, such as setting their username and password.
  */
 public class Client {
     final private int clientNumber;
