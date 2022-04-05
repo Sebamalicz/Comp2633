@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-public class MainMenu {
+public class MainMenu extends Display{
 
     private JFrame frame;
     private ArrayList<JButton> view;
@@ -15,8 +15,9 @@ public class MainMenu {
     private Color background;
     private int initialX, initialY;
 
-    public MainMenu(Chequing chequing, ArrayList<Savings> saving, ArrayList<Credit> credit)
+    public MainMenu(Contact contacts, Chequing chequing, ArrayList<Savings> saving, ArrayList<Credit> credit)
     {
+        super(contacts, chequing, saving, credit);
         initialX = 450;
         initialY = 200;
         view = new ArrayList<JButton>();

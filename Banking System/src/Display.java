@@ -23,6 +23,6 @@ public class Display {
 
     public void displayMenu()
     {
-        menu = new MainMenu(chequings, savings, credit);
+        menu = new MainMenu(contacts, chequings, savings, credit);
     }
 }

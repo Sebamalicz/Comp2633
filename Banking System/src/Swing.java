@@ -11,9 +11,9 @@ import javax.swing.JTextField;
 /*
  *
  */
-public class Swing {
+public class Swing{
 
-    private JFrame frame; //The actual screen frame
+    private JFrame frame; //The actual screen frameS
     private JButton Login; //Button for Login
     private JButton ForgotPassword; //Button for Forgot Password
     private JTextField userName; //A text field to input username
