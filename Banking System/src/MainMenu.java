@@ -76,6 +76,10 @@ public class MainMenu extends Display{
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 transactionScreen screen = new transactionScreen(chequing);
+                screen.setChequings(getChequing());
+                screen.setContacts(getContacts());
+                screen.setCredit(getCredit());
+                screen.setSavings(getSavings());
             }
         });
         text = new JTextArea("Chequing Account");
@@ -121,6 +125,10 @@ public class MainMenu extends Display{
                        }
                        frame.dispose();
                        transactionScreen screen = new transactionScreen(saving.get(savingNumber));
+                       screen.setChequings(getChequing());
+                       screen.setContacts(getContacts());
+                       screen.setCredit(getCredit());
+                       screen.setSavings(getSavings());
                     }
                 });
                 text = new JTextArea("Account Number: " + String.valueOf(saving.get(savings).getAccountNumber()));
@@ -168,6 +176,10 @@ public class MainMenu extends Display{
                         }
                         frame.dispose();
                         transactionScreen screen = new transactionScreen(credit.get(creditNumber));
+                        screen.setChequings(getChequing());
+                        screen.setContacts(getContacts());
+                        screen.setCredit(getCredit());
+                        screen.setSavings(getSavings());
                     }
                 });
                 text = new JTextArea("Credit Card #: " + String.valueOf(credit.get(credits).getCardNumber()));

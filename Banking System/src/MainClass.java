@@ -50,12 +50,13 @@ public class MainClass {
                         inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
                         read = readFile(inputFile, username, password);
                         loggedIn = true;
+                        display = new Display();
                         client = read.getClient();
-                        contacts = read.getContacts();
-                        chequing = read.getChequing();
-                        saving = read.getSavings();
-                        credit = read.getCards();
-                        display = new Display(contacts, chequing, saving, credit);
+                        display.setContacts(read.getContacts());
+                        display.setChequings(read.getChequing());
+                        display.setCredit(read.getCards());
+                        display.setSavings(read.getSavings());
+
                         screen.disposeLogin();
                         display.displayMenu();
                     }

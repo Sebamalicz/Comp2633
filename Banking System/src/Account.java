@@ -85,9 +85,9 @@ public class Account {
     public boolean eTransfer(Account account, Recipient recipient, double amount, String date) {
         boolean moveProcessed = false;
 
-        if (recipient != null && amount <= account.getBalance)
+        if (recipient != null && amount <= account.getBalance())
         {
-            if(account instanceof Saving)
+            if(account instanceof Savings)
             {
                 account.subBalance(amount);
                 Transaction newTrans = new Transaction(date, recipient.getName(), amount);
@@ -125,7 +125,7 @@ public class Account {
             }
         }
     }
-    
+
     public boolean setUpRecurrPayments(Payee payee, double amount, String date)
     {
         boolean setUpSuccess = false;
@@ -143,23 +143,23 @@ public class Account {
 
         return setUpSuccess;
     }
-    
+
     public void enableAutoDeposit()
     {
         this.autoDeposit = true;
         return;
     }
-    
+
     public void setContacts(Contact contacts)
     {
         this.contacts = contacts;
         return;
     }
-    
+
     public void subBalance(double amount)
     {
         this.balance -= amount;
         return;
     }
-    
+
 }
