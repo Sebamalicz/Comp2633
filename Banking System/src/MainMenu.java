@@ -57,9 +57,10 @@ public class MainMenu extends Display{
     private void createInitialButtons(Chequing chequing, ArrayList<Savings> saving, ArrayList<Credit> credit)
     {
         int i = 0;
+        int savingSize = saving.size();
         i = createChequing(chequing, i);
         i = createSaving(saving, i);
-        createCredit(credit, i);
+        createCredit(credit, i, savingSize);
 
     }
 
@@ -115,14 +116,18 @@ public class MainMenu extends Display{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                        int i, savingNumber = 0;
-                       for(i = 0; i < saving.size(); i++)
+                       for(i = 0; i < view.size(); i++)
                        {
-                           if(e.getSource() == saving.get(i))
+                           if(e.getSource().equals(view.get(i)))
                            {
-                               savingNumber = i;
-                               i = saving.size();
-                           }
+                               savingNumber = i - 1;
+                               i = view.size();
+                          }
                        }
+                       System.out.println(saving.get(savingNumber).getBalance());
+                       System.out.println(savingNumber);
+
+
                        frame.dispose();
                        transactionScreen screen = new transactionScreen(saving.get(savingNumber));
                        screen.setChequings(getChequing());
@@ -146,7 +151,7 @@ public class MainMenu extends Display{
         return i;
     }
 
-    private void createCredit(ArrayList<Credit> credit, int i)
+    private void createCredit(ArrayList<Credit> credit, int i, int saving)
     {
         //add credit card account view buttons to screen (if multiple exist/ or single)
         int temp = i;
@@ -166,12 +171,12 @@ public class MainMenu extends Display{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int i, creditNumber = 0;
-                        for(i = 0; i < credit.size(); i++)
+                        for(i = 0; i < view.size(); i++)
                         {
-                            if(e.getSource() == credit.get(i))
+                            if(e.getSource().equals(view.get(i)))
                             {
-                                creditNumber = i;
-                                i = credit.size();
+                                creditNumber = i - (1 + saving);
+                                i = view.size();
                             }
                         }
                         frame.dispose();
