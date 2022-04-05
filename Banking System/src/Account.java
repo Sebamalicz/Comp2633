@@ -75,7 +75,7 @@ public class Account {
             fromAccount.subBalance(amount);
             toAccount.recieveMoney(amount);
             moveProcessed = true;
-            if(fromAccount instanceof Saving)
+            if(fromAccount instanceof Savings)
             {
                 Transaction newTrans = new Transaction(date, "To chequing account", amount);
                 fromAccount.transactions.add(newTrans);
