@@ -9,11 +9,13 @@ public class Account {
     final private int accountNumber;
     private double balance;
     private ArrayList<Transaction> transactions;
+    private boolean autoDeposit;
 
 
     public Account(int accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.autoDeposit = false;
     }
 
     public int getAccountNumber() {
@@ -106,5 +108,11 @@ public class Account {
             }
         }
 
+    }
+    
+    public void enableAutoDeposit()
+    {
+        this.autoDeposit = true;
+        return;
     }
 }
