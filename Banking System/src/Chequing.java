@@ -2,9 +2,9 @@
 public class Chequing extends Account{
     final private double annualCost;
 
-    public Chequing(double annualCost, int accountNumber, double balance)
+    public Chequing(double annualCost, int accountNumber, double balance, ArrayList<Transaction> transactions)
     {
-        super(accountNumber, balance);
+        super(accountNumber, balance, transactions);
         this.annualCost = annualCost;
     }
 
