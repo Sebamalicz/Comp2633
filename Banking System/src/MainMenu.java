@@ -227,7 +227,7 @@ public class MainMenu extends Display{
     private void createSettings()
     {
         settings = new JButton("Settings");
-        settings.setBounds(400, 20, 100, 30);
+        settings.setBounds(440, 40, 100, 30);
         settings.addActionListener(new ActionListener()
         {
             @Override

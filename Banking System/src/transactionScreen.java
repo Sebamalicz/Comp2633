@@ -1,11 +1,16 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import javax.swing.JLabel;
 
 public class transactionScreen extends Display{
     private Savings saving;
@@ -13,7 +18,7 @@ public class transactionScreen extends Display{
     private Credit credit;
     private ArrayList<Transaction> transactions;
     private JFrame frame;
-    private JTextArea text;
+    private JLabel label;
     private JButton button;
     private Color background;
     private int initialX, initialY;
@@ -43,13 +48,25 @@ public class transactionScreen extends Display{
     {
         frame = new JFrame();
         initialX = 20;
-        initialY = 80;
+        initialY = 180;
         background = new Color(9, 97, 146);
+
+        BufferedImage image;
+
+        try { //print the header onto the login screen
+            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\mainMenuHeader.png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            label.setBounds(0, 0, 600, 130);
+            frame.add(label);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(background);
 
         createBackButton();
+        displayInfo();
         displayTrans();
 
         frame.setSize(600, 600);
@@ -61,7 +78,7 @@ public class transactionScreen extends Display{
     private void createBackButton()
     {
         button = new JButton("Go Back");
-        button.setBounds(480, 20, 100, 30);
+        button.setBounds(440, 40, 100, 30);
         button.addActionListener(new ActionListener()
         {
             @Override
@@ -73,22 +90,35 @@ public class transactionScreen extends Display{
         frame.add(button);
     }
 
-    public void displayTrans()
+    private void displayInfo()
+    {
+        label = new JLabel("Location");
+        label.setBounds(initialX, initialY - 50, 200, 30);
+        frame.add(label);
+        label = new JLabel("Date");
+        label.setBounds(initialX + 220, initialY - 50, 200, 30);
+        frame.add(label);
+        label = new JLabel("Amount");
+        label.setBounds(initialX + 420, initialY - 50, 100, 30);
+        frame.add(label);
+    }
+
+    private void displayTrans()
     {
         if(transactions != null)
         {
             int i = 0;
             while(i < transactions.size() && i * 50 < 600)
             {
-                text = new JTextArea(transactions.get(i).getGeneral());
-                text.setBounds(initialX, initialY + (i * 50), 100, 30);
-                frame.add(text);
-                text = new JTextArea(transactions.get(i).getDate());
-                text.setBounds(initialX + 120, initialY + (i * 50), 100, 30);
-                frame.add(text);
-                text = new JTextArea(String.valueOf(transactions.get(i).getAmountUsed()));
-                text.setBounds(initialX + 240, initialY + (i * 50), 100, 30);
-                frame.add(text);
+                label = new JLabel(transactions.get(i).getGeneral());
+                label.setBounds(initialX, initialY + (i * 50), 200, 30);
+                frame.add(label);
+                label = new JLabel(transactions.get(i).getDate());
+                label.setBounds(initialX + 220, initialY + (i * 50), 200, 30);
+                frame.add(label);
+                label = new JLabel(String.valueOf(transactions.get(i).getAmountUsed()));
+                label.setBounds(initialX + 420, initialY + (i * 50), 100, 30);
+                frame.add(label);
                 i++;
             }
         }

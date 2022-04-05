@@ -1,7 +1,12 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +28,17 @@ public class Settings extends Display{
         etransfer = new JButton("E-Transfer");
         manage = new JButton("Manage Contacts");
         recurring = new JButton("Recurring Payments");
+
+        BufferedImage image;
+
+        try { //print the header onto the login screen
+            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\mainMenuHeader.png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            label.setBounds(0, 0, 600, 130);
+            frame.add(label);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(background);
