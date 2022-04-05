@@ -5,13 +5,15 @@ public class FileRead {
     private Chequing chequing;
     private Contact contacts;
     private ArrayList<Savings> saving;
+    private ArrayList<Credit> creditCards;
 
-    public FileRead(Client client, Chequing chequing, Contact contacts, ArrayList<Savings> saving)
+    public FileRead(Client client, Chequing chequing, Contact contacts, ArrayList<Savings> saving, ArrayList<Credit> cards)
     {
         this.client = client;
         this.chequing = chequing;
         this.contacts = contacts;
         this.saving = saving;
+        this.creditCards = cards;
     }
 
     public Client getClient()
@@ -32,5 +34,10 @@ public class FileRead {
     public ArrayList<Savings> getSavings()
     {
         return this.saving;
+    }
+    
+    public ArrayList<Credit> getCards()
+    {
+        return this.creditCards;
     }
 }
