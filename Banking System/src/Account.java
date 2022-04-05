@@ -82,15 +82,29 @@ public class Account {
         return moveProcessed;
     }
 
-    public boolean eTransfer(Recipient recipient, double amount, String date) {
+    public boolean eTransfer(Account account, Recipient recipient, double amount, String date) {
         boolean moveProcessed = false;
 
-        if (recipient != null && amount <= this.balance)
+        if (recipient != null && amount <= account.getBalance)
         {
-            this.balance =- amount;
-            Transaction newTrans = new Transaction(date, "eTransfered money to: " + recipient.getName(), amount);
-            this.transactions.add(newTrans);
-            moveProcessed = true;
+            if(account instanceof Saving)
+            {
+                account.subBalance(amount);
+                Transaction newTrans = new Transaction(date, recipient.getName(), amount);
+                account.transactions.add(newTrans);
+                moveProcessed = true;
+            }
+            else if(account instanceof Chequing)
+            {
+                account.subBalance(amount);
+                Transaction newTrans = new Transaction(date, recipient.getName(), amount);
+                account.transactions.add(newTrans);
+                moveProcessed = true;
+            }
+            else
+            {
+                moveProcessed = false;
+            }
         }
 
         return moveProcessed;
@@ -124,4 +138,11 @@ public class Account {
         this.contacts = contacts;
         return;
     }
+    
+    public void subBalance(double amount)
+    {
+        this.balance -= amount;
+        return;
+    }
+    
 }
