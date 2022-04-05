@@ -251,5 +251,11 @@ public class MainClass {
 
         return null;
     }
+    
+    
+    public static FileRead readTransactions()
+    {
+        
+    }
 
 }
