@@ -8,14 +8,6 @@ public class Chequing extends Account{
         this.annualCost = annualCost;
     }
 
-    public void getCheque()
-    {
-        /*
-         * Gets cheque and sends it to the email address that is written under
-         * the account, to be further processed by the
-         */
-    }
-
     public double getAnnualCost()
     {
         return this.annualCost;
