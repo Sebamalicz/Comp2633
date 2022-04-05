@@ -10,7 +10,7 @@ public class Account {
     private double balance;
     private ArrayList<Transaction> transactions;
     private boolean autoDeposit;
-    private Contact contacts;
+    private Contact contacts; 
 
 
     public Account(int accountNumber, double balance, ArrayList<Transaction> transactions) {
@@ -67,16 +67,28 @@ public class Account {
         this.balance += amount;
     }
 
-    public boolean moveMoney(Account account, double amount, String date) {
+    public boolean moveMoney(Account fromAccount, Account toAccount, double amount, String date) {
         boolean moveProcessed = false;
 
-        if (account != null && amount <= this.balance)
+        if (froma=Account != null && toAccount != null && amount <= fromAccount.getBalance())
         {
-            this.balance =- amount;
-            account.recieveMoney(amount);
-            Transaction newTrans = new Transaction(date, "Moved money to account: " + account.getAccountNumber(), amount);
-            this.transactions.add(newTrans);
+            fromAccount.subBalance(amount);
+            toAccount.recieveMoney(amount);
             moveProcessed = true;
+            if(fromAccount instanceof Saving)
+            {
+                Transaction newTrans = new Transaction(date, "To chequing account", amount);
+                fromAccount.transactions.add(newTrans);
+                newTrans = new Transaction(date, "From savings account", amount);
+                toAccount.transactions.add(newTrans);
+            }
+            else
+            {
+                Transaction newTrans = new Transaction(date, "To savings account", amount);
+                fromAccount.transactions.add(newTrans);
+                newTrans = new Transaction(date, "From chequing account", amount);
+                toAccount.transactions.add(newTrans);
+            }
         }
 
         return moveProcessed;
