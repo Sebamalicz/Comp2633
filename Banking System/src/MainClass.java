@@ -98,6 +98,8 @@ public class MainClass {
         String temp;
         String nickName;
         String email;
+        String date;
+        String general;
         int clientNum;
         int accNum;
         int cardNum;
@@ -111,6 +113,7 @@ public class MainClass {
         FileRead read;
         ArrayList<Savings> saving = new ArrayList<Savings>();
         ArrayList<Credit> creditCards = new ArrayList<Credit>();
+        ArrayList<Transaction> transList = new ArrayList<Transaction>();
         Contact contacts = new Contact();
         Client client = null;
         Chequing chequing = null;
@@ -167,6 +170,7 @@ public class MainClass {
 
                     temp = input.nextLine(); //pre loop read
                     /* begin reading savings account*/
+                    
                     while (temp.compareTo("----------------") != 0)
                     {
                         interestRate = Double.parseDouble(temp);
@@ -186,7 +190,26 @@ public class MainClass {
                         temp = input.nextLine();
                     }
                     
+                    /* begin reading transactions*/
+                    
+                    temp = input.nextLine();
+                    while(temp.compareTo("----------------") != 0)
+                    {
+                        date = temp;
+                        temp = input.nextLine();
+                        general = temp;
+                        temp = input.nextLine();
+                        cost = Double.parseDouble(temp);
+                        
+                        Transaction newTrans = new Transaction(date, general, cost);
+                        transList.add(newTrans);
+                        
+                        temp = input.nextLine();
+                    }
+                    
+                    
                     /* begin reading credit card info*/
+                   
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
@@ -200,7 +223,7 @@ public class MainClass {
                         
                         temp = input.nextLine();
                         
-                        Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, null);
+                        Credit credCard = new Credit(balance, creditLimit, interestRate, cardNum, transList);
                         creditCards.add(credCard);
                         
                         temp = input.nextLine();
@@ -229,6 +252,7 @@ public class MainClass {
                     }
 
                     /* begin reading recipient info*/
+                    
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
@@ -252,10 +276,5 @@ public class MainClass {
         return null;
     }
     
-    
-    public static FileRead readTransactions()
-    {
-        
-    }
 
 }
