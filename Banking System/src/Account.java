@@ -105,14 +105,7 @@ public class Account {
 
         if (recipient != null && amount <= account.getBalance())
         {
-            if(account instanceof Savings)
-            {
-                account.subBalance(amount);
-                Transaction newTrans = new Transaction(date, recipient.getName(), amount);
-                account.transactions.add(newTrans);
-                moveProcessed = true;
-            }
-            else if(account instanceof Chequing)
+            if(account instanceof Savings || account instanceof Chequing)
             {
                 account.subBalance(amount);
                 Transaction newTrans = new Transaction(date, recipient.getName(), amount);
