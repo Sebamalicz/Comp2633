@@ -29,6 +29,12 @@ public class Account {
         return this.balance;
     }
 
+    public void addTransaction(String general, String date, double amount)
+    {
+        Transaction newTransaction = new Transaction(date, general, amount);
+        transactions.add(newTransaction);
+    }
+
     public ArrayList<Transaction> getTransactions()
     {
         return this.transactions;

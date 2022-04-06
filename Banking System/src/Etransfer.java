@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -11,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Etransfer extends Display{
     private JFrame frame;
@@ -108,7 +111,19 @@ public class Etransfer extends Display{
                            i = button.size();
                        }
                    }
-
+                   JOptionPane amount = new JOptionPane();
+                   double money;
+                   String input = amount.showInputDialog("Enter amount to send to: " + recipient.get(recNum).getName());
+                   if(input != null)
+                   {
+                       money = Double.parseDouble(input);
+                       Chequing chequing = getChequing();
+                       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM dd, yyyy");
+                       LocalDateTime now = LocalDateTime.now();
+                       chequing.subBalance(money);
+                       chequing.addTransaction(recipient.get(recNum).getName(), dtf.format(now), money);
+                       JOptionPane.showMessageDialog(frame, "Money Sent!");
+                   }
                }
             });
             frame.add(button.get(i));
