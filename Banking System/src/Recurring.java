@@ -1,4 +1,4 @@
 
-public class Recurring {
+public class Recurring extends Display{
 
 }

@@ -27,7 +27,7 @@ public class MainClass {
 
 
         Swing screen = new Swing();
-        Display display;
+        MainMenu display;
 
         boolean loginPressed = false;
         boolean loggedIn = false;
@@ -52,15 +52,10 @@ public class MainClass {
                         inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
                         read = readFile(inputFile, username, password);
                         loggedIn = true;
-                        display = new Display();
+                        display = new MainMenu(read.getContacts(), read.getChequing(), read.getSavings(), read.getCards());
                         client = read.getClient();
-                        display.setContacts(read.getContacts());
-                        display.setChequings(read.getChequing());
-                        display.setCredit(read.getCards());
-                        display.setSavings(read.getSavings());
 
                         screen.disposeLogin();
-                        display.displayMenu();
                     }
                     else
                     {
@@ -254,8 +249,8 @@ public class MainClass {
                     temp = input.nextLine();
                     while(temp.compareTo("----------------") != 0)
                     {
-                        email = temp;
-                        nickName = input.nextLine();
+                        nickName = temp;
+                        email = input.nextLine();
                         temp = input.nextLine();
                         phone = Integer.parseInt(temp);
 

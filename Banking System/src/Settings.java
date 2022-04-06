@@ -108,7 +108,12 @@ public class Settings extends Display{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
+                frame.dispose();
+                Etransfer screen = new Etransfer(getContacts());
+                screen.setChequings(getChequing());
+                screen.setContacts(getContacts());
+                screen.setCredit(getCredit());
+                screen.setSavings(getSavings());
             }
         });
         frame.add(etransfer);

@@ -232,12 +232,13 @@ public class MainMenu extends Display{
         {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
                 Settings screen = new Settings();
                 screen.setChequings(getChequing());
                 screen.setContacts(getContacts());
                 screen.setCredit(getCredit());
                 screen.setSavings(getSavings());
+                frame.dispose();
+
             }
         });
 
