@@ -1,22 +1,28 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class Recurring extends Display{
-  
+
     private JFrame frame;
     private JButton back;
     private ArrayList<JButton> pay;
     // used for payees
     private JLabel label;
     private int initialX, initialY;
-    
+
 
     public Recurring(Contact contact)
     {
@@ -25,9 +31,20 @@ public class Recurring extends Display{
         back = new JButton("Go Back");
         pay = new ArrayList<JButton>();
 
-        initialX = 450;
-        initialY = 200;
-      
+        initialX = 20;
+        initialY = 180;
+
+        BufferedImage image;
+
+        try { //print the header onto the screen
+            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\mainMenuHeader.png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            label.setBounds(0, 0, 600, 130);
+            frame.add(label);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(background);
 
@@ -43,16 +60,42 @@ public class Recurring extends Display{
 
      private void createInitialButtons(ArrayList<Payee> payees)
      {
-
-        setUpPay(payees, payees.size());
-
+         createBack();
+         setUpPay(payees, payees.size());
      }
-  
-     public void setUpPay(ArrayList<Payee> payees, int size)
+
+
+     private void createBack()
+     {
+         back.setBounds(440, 40, 100, 30);
+         back.addActionListener(new ActionListener() {
+             @Override
+          public void actionPerformed(ActionEvent e)
+             {
+                 frame.dispose();
+                 Settings screen = new Settings();
+                 screen.setChequings(getChequing());
+                 screen.setContacts(getContacts());
+                 screen.setCredit(getCredit());
+                 screen.setSavings(getSavings());
+                 frame.dispose();
+             }
+         });
+         frame.add(back);
+     }
+
+
+     private void setUpPay(ArrayList<Payee> payees, int size)
      {
         int i = 0;
         String num;
-        
+
+        label = new JLabel("Payee(s)");
+        label.setBounds(initialX, initialY - 50, 100, 30);
+        frame.add(label);
+        label = new JLabel("Account Number(s)");
+        label.setBounds(initialX + 220, initialY - 50, 150, 30);
+        frame.add(label);
         while(i < payees.size())
         {
             label = new JLabel(payees.get(i).getNickName());
@@ -79,14 +122,12 @@ public class Recurring extends Display{
                    JOptionPane amount = new JOptionPane();
                    JOptionPane date = new JOptionPane();
                    double money;
-                   String input = amount.showInputDialog("Enter amount to send to: " + payees.get(payNum).getName());
-                   String sendDate = date.showInputDialog("Enter date to send: ");
+                   String input = amount.showInputDialog("Amount to send Recurringly: " + payees.get(payNum).getNickName());
+                   String sendDate = date.showInputDialog("Enter date to send: (Month dd, yyyy)");
                    if(input != null && sendDate != null)
                    {
                        money = Double.parseDouble(input);
-                       Credit newCard = getCredit();
-                       newCard.transactions.add(new Transaction(sendDate, payees.get(payNum).getName(), money));
-                       JOptionPane.showMessageDialog(frame, "Payment set up!");
+                      JOptionPane.showMessageDialog(frame, "Payment set up!");
                    }
 
                }

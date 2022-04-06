@@ -1,0 +1,24 @@
+123456789
+March 14, 2022
+Walmart
+36.45
+June 25, 2021
+Dicks sporting goods
+65.98
+----------------
+345679835
+August 21, 2021
+AB king pizza
+21.83
+----------------
+123456123
+July 3, 2021
+McDicks
+12.78
+April 1, 2022
+A&W
+9.99
+April 20, 2022
+Global leaf
+4.20
+----------------
