@@ -1,11 +1,17 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -34,8 +40,20 @@ public class manageContacts extends Display{
       edit = new ArrayList<JButton>();
       payees = contact.getPayees();
       recipients = contact.getRecipients();
-      initialX = 30;
-      initialY = 80;
+      initialX = 20;
+      initialY = 180;
+
+      BufferedImage image;
+
+      try { //print the header onto the screen
+          image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\mainMenuHeader.png"));
+          JLabel label = new JLabel(new ImageIcon(image));
+          label.setBounds(0, 0, 600, 130);
+          frame.add(label);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.getContentPane().setBackground(background);
@@ -52,11 +70,11 @@ public class manageContacts extends Display{
 
    private void createInitialButtons()
    {
-      int sumSize = payees.size() + recipients.size();
+      int i = 0;
 
       createBack();
-      listPayees(payees, payees.size());
-     // listRecipients(recipients, recipients.size());
+      i = listPayees(payees, payees.size(), i);
+      listRecipients(recipients, recipients.size(), i);
 
    }
 
@@ -79,9 +97,8 @@ public class manageContacts extends Display{
        frame.add(back);
    }
 
-  public void listPayees(ArrayList<Payee> payees, int size)
+  private int listPayees(ArrayList<Payee> payees, int size, int i)
   {
-      int i = 0;
       payeeName = new ArrayList<JTextField>();
       payeeAccNum = new ArrayList<JTextField>();
 
@@ -119,8 +136,16 @@ public class manageContacts extends Display{
 
                   if(selected < payees.size())
                   {
-                    payees.get(selected).setNickName(payeeName.get(selected).getText());
-                    payees.get(selected).setAccountNumber(Integer.parseInt(payeeAccNum.get(selected).getText()));
+                      if(!payeeName.get(selected).getText().equals(payees.get(selected).getNickName()))
+                      {
+                          payees.get(selected).setNickName(payeeName.get(selected).getText());
+                          JOptionPane.showMessageDialog(frame, "Nickname Changed!");
+                      }
+                      if(Integer.parseInt(payeeAccNum.get(selected).getText()) != payees.get(selected).getAccountNumber())
+                      {
+                          payees.get(selected).setAccountNumber(Integer.parseInt(payeeAccNum.get(selected).getText()));
+                          JOptionPane.showMessageDialog(frame, "Account Number Changed!");
+                      }
                   }
 
               }
@@ -129,38 +154,42 @@ public class manageContacts extends Display{
           frame.add(edit.get(i));
           i++;
       }
+      return i;
     }
 
-    public void listRecipients(ArrayList<Recipient> recipients, int size)
+    public void listRecipients(ArrayList<Recipient> recipients, int size, int i)
     {
-
-        int i = 0;
+        int rec = 0;
         recipientName = new ArrayList<JTextField>();
         recipientEmail = new ArrayList<JTextField>();
         recipientPhone = new ArrayList<JTextField>();
+
         label = new JLabel("Recipient(s)");
-        label.setBounds(30, 80, 100, 60);
+        label.setBounds(initialX, initialY + (i * 50), 100, 30);
         frame.add(label);
-        while(i < size + 1)
+        while(rec < size)
         {
-            recipientName.get(i).add(new JTextField(recipients.get(i).getName()));
-            recipientName.get(i).setBounds(initialX, initialY + (i * 50), 100, 30);
-            frame.add(recipientName.get(i));
-            recipientEmail.get(i).add(new JTextField(recipients.get(i).getEmail()));
-            recipientEmail.get(i).setBounds(initialX, initialY + (i * 50), 100, 30);
-            frame.add(recipientEmail.get(i));
-            if(recipients.get(i).getPhoneNumber() != 0)
+            recipientName.add(new JTextField(recipients.get(rec).getName()));
+            recipientName.get(rec).setBounds(initialX, initialY + (i * 50) + 50, 100, 30);
+            frame.add(recipientName.get(rec));
+            recipientEmail.add(new JTextField(recipients.get(rec).getEmail()));
+            recipientEmail.get(rec).setBounds(initialX + 120, initialY + (i * 50) + 50, 150, 30);
+            frame.add(recipientEmail.get(rec));
+            if(recipients.get(rec).getPhoneNumber() != 0)
             {
-                String phone = Integer.toString(recipients.get(i).getPhoneNumber());
-                recipientPhone.get(i).add(new JTextField(phone));
-                recipientPhone.get(i).setBounds(initialX, initialY + (i * 50), 100, 30);
-                frame.add(recipientPhone.get(i));
+                String phone = Integer.toString(recipients.get(rec).getPhoneNumber());
+                recipientPhone.add(new JTextField(phone));
+                recipientPhone.get(rec).setBounds(initialX + 290, initialY + (i * 50) + 50, 100, 30);
+                frame.add(recipientPhone.get(rec));
+                edit.add(new JButton("Edit"));
+                edit.get(i).setBounds(initialX + 410, initialY + (i * 50) + 50, 100, 30);
             }
-
-            edit.add(new JButton("Edit"));
-            edit.get(i).setBounds(initialX, initialY + (i * 50) + 50, 100, 30);
-            edit.get(i).addActionListener(new ActionListener(){
-
+            else
+            {
+                edit.add(new JButton("Edit"));
+                edit.get(i).setBounds(initialX + 410, initialY + (i * 50) + 50, 100, 30);
+            }
+              edit.get(i).addActionListener(new ActionListener(){
               //allows the clicking of edit for Contacts
               @Override
               public void actionPerformed(ActionEvent e) {
@@ -185,6 +214,9 @@ public class manageContacts extends Display{
 
               }
             });
+            frame.add(edit.get(i));
+            i++;
+            rec++;
         }
     }
 }
