@@ -36,7 +36,7 @@ public class MainMenu extends Display{
         BufferedImage image;
 
         try { //print the header onto the login screen
-            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\mainMenuHeader.png"));
+            image = ImageIO.read(new File("mainMenuHeader.png"));
             JLabel label = new JLabel(new ImageIcon(image));
             label.setBounds(0, 0, 600, 130);
             frame.add(label);
