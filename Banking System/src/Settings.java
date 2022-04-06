@@ -78,7 +78,12 @@ public class Settings extends Display{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
+                frame.dispose();
+                manageContacts screen = new manageContacts(getContacts());
+                screen.setChequings(getChequing());
+                screen.setContacts(getContacts());
+                screen.setCredit(getCredit());
+                screen.setSavings(getSavings());
             }
         });
         frame.add(manage);

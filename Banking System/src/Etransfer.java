@@ -120,8 +120,7 @@ public class Etransfer extends Display{
                        Chequing chequing = getChequing();
                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM dd, yyyy");
                        LocalDateTime now = LocalDateTime.now();
-                       chequing.subBalance(money);
-                       chequing.addTransaction(recipient.get(recNum).getName(), dtf.format(now), money);
+                       chequing.eTransfer(chequing, recipient.get(recNum), money, dtf.format(now));
                        JOptionPane.showMessageDialog(frame, "Money Sent!");
                    }
                }
