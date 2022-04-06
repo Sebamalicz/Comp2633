@@ -26,7 +26,7 @@ public class manageContacts extends Display{
       Color background = new Color(9, 97, 146);
       frame = new JFrame();
       back = new JButton("Go Back");
-      select = new ArrayList<JButton>();
+      edit = new ArrayList<JButton>();
 
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.getContentPane().setBackground(background);
