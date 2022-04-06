@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ public class Recurring extends Display{
     private ArrayList<JButton> pay;
     // used for payees
     private JLabel label;
+    private int initialX, initialY;
     
 
     public Recurring(Contact contact)
@@ -23,6 +25,9 @@ public class Recurring extends Display{
         back = new JButton("Go Back");
         pay = new ArrayList<JButton>();
 
+        initialX = 450;
+        initialY = 200;
+      
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(background);
 
@@ -46,13 +51,15 @@ public class Recurring extends Display{
      public void setUpPay(ArrayList<Payee> payees, int size)
      {
         int i = 0;
+        String num;
         
-        while(i < payee.size())
+        while(i < payees.size())
         {
-            label = new JLabel(payees.get(i).getName());
+            label = new JLabel(payees.get(i).getNickName());
             label.setBounds(initialX, initialY + (i * 50), 200, 30);
             frame.add(label);
-            label = new JLabel(payees.get(i).getAccountNumber());
+            num = Integer.toString(payees.get(i).getAccountNumber());
+            label = new JLabel(num);
             label.setBounds(initialX + 220, initialY + (i * 50), 200, 30);
             frame.add(label);
             pay.add(new JButton("Pay"));
@@ -63,16 +70,16 @@ public class Recurring extends Display{
                    int i, payNum = 0;
                    for(i = 0; i < pay.size(); i++)
                    {
-                       if(e.getSource().equals(button.get(i)))
+                       if(e.getSource().equals(pay.get(i)))
                        {
                            payNum = i;
-                           i = button.size();
+                           i = pay.size();
                        }
                    }
 
                }
             });
-            frame.add(button.get(i));
+            frame.add(pay.get(i));
             i++;
         }
      }
