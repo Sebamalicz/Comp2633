@@ -46,10 +46,10 @@ public class MainClass {
                 password = screen.getPassText();
                 try
                 {
-                    checkFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
+                    checkFile = new Scanner(new File("input.txt"));
                     if(checkUser(checkFile, username, password))
                     {
-                        inputFile = new Scanner(new File("C:\\Users\\smska\\Desktop\\input.txt"));
+                        inputFile = new Scanner(new File("input.txt"));
                         read = readFile(inputFile, username, password);
                         loggedIn = true;
                         display = new MainMenu(read.getContacts(), read.getChequing(), read.getSavings(), read.getCards());
@@ -280,7 +280,7 @@ public class MainClass {
         Scanner input;
         try
         {
-            input = new Scanner(new File("C:\\Users\\smska\\Desktop\\transactions.txt"));
+            input = new Scanner(new File("transactions.txt"));
             while(input.hasNext())
             {
                 temp = input.nextLine();
