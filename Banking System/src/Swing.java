@@ -44,7 +44,7 @@ public class Swing{
         BufferedImage image;
 
         try { //print the image onto the login screen
-            image = ImageIO.read(new File("C:\\Users\\smska\\Desktop\\SES_Banking.png"));
+            image = ImageIO.read(new File("SES_Banking.png"));
             JLabel label = new JLabel(new ImageIcon(image));
             label.setBounds(100, 25, 400, 250); //x axis, y axis, width, height
             frame.add(label);
