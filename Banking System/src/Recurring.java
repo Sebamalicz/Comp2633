@@ -76,6 +76,18 @@ public class Recurring extends Display{
                            i = pay.size();
                        }
                    }
+                   JOptionPane amount = new JOptionPane();
+                   JOptionPane date = new JOptionPane();
+                   double money;
+                   String input = amount.showInputDialog("Enter amount to send to: " + payees.get(payNum).getName());
+                   String sendDate = date.showInputDialog("Enter date to send: ");
+                   if(input != null && sendDate != null)
+                   {
+                       money = Double.parseDouble(input);
+                       Credit newCard = getCredit();
+                       newCard.transactions.add(new Transaction(sendDate, payees.get(payNum).getName(), money));
+                       JOptionPane.showMessageDialog(frame, "Payment set up!");
+                   }
 
                }
             });
